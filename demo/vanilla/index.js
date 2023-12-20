@@ -1,7 +1,7 @@
 import {LavaDome as LavaDomeVanilla} from '../../packages/vanilla/index.mjs';
 
 top.start = (function(){
-    const secret = 456;
+    const secret = 'SECRET_CONTENT_ONLY_ACCESSIBLE_TO_LAVADOME';
 
     return function start(root) {
         root.innerHTML = '';
