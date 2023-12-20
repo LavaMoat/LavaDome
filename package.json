@@ -23,13 +23,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/weizman/LavaDome.git"
+    "url": "git+https://github.com/lavamoat/LavaDome.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/weizman/LavaDome/issues"
+    "url": "https://github.com/lavamoat/LavaDome/issues"
   },
-  "homepage": "https://github.com/weizman/LavaDome#readme"
+  "homepage": "https://github.com/lavamoat/LavaDome#readme"
 }

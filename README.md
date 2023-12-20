@@ -2,11 +2,11 @@
     <h1> LavaDome 🌋️ </h1>
     <i> ~ A new <a href="https://github.com/lavamoat">LavaMoat</a> tool for <b>DOM</b> nodes secured <b>E</b>ncapsulation ~ </i>
     <br/><br/>
-    <img src="https://img.shields.io/npm/v/@weizman/lavadome"/>
-    <img src="https://img.shields.io/bundlephobia/min/@weizman/lavadome"/>
+    <img src="https://img.shields.io/npm/v/@lavamoat/lavadome"/>
+    <img src="https://img.shields.io/bundlephobia/min/@lavamoat/lavadome"/>
     <img src="https://badges.frapsoft.com/javascript/code/javascript.svg?v=101" width="113">
-    <img src="https://img.shields.io/npm/dw/@weizman/lavadome"/>
-    <img src="https://img.shields.io/github/license/weizman/lavadome"/>
+    <img src="https://img.shields.io/npm/dw/@lavamoat/lavadome"/>
+    <img src="https://img.shields.io/github/license/lavamoat/lavadome"/>
     <br/><br/>
     <br/><br/>
 </div> 
@@ -51,7 +51,7 @@ it does a pretty good job in isolating subtrees of the DOM from the rest of it.
 
 Therefore, we believe leveraging ShadowDOM while carefully addressing 
 [potential security gaps](https://blog.ankursundara.com/shadow-dom/), 
-**[LavaDomEncapsulation](https://github.com/weizman/lavadome/)** should be 
+**[LavaDomEncapsulation](https://github.com/lavamoat/lavadome/)** should be 
 a **security tool to join the LavaMoat toolbox** to allow developers to implement 
 frontend-only components that will aspire to only allow their code and the user to access/interact with,
 while not allow similar access to other untrusted JavaScript code in the app.
@@ -117,7 +117,7 @@ being a security feature by default (see [Security](#Security)).
 
 Export functionalities for developers to consume LavaDome however they prefer,
 whether by vanilla JavaScript or as a React component 
-(or any other platform - [ask away!](https://github.com/weizman/lavadome/issues/new?title=LavaDome+misses+support+for+...))
+(or any other platform - [ask away!](https://github.com/lavamoat/lavadome/issues/new?title=LavaDome+misses+support+for+...))
 
 > NOTE: Delivering LavaDome support for frameworks integrates third party code
 > that is out of our control, which results in "security blank spots" - please
