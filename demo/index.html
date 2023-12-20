@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🌋</text></svg>">
+        <title>LavaDome Demo</title>
+        <script>
+            const mode = location.href.split('?')[1];
+            if (!mode) {
+                location.href += '?vanilla';
+            }
+            const s = document.createElement('script');
+            s.src = './' + mode + '/index.js';
+            s.type = 'module';
+            s.onload = () => start(PRIVATE);
+            document.currentScript.after(s);
+        </script>
+    </head>
+    <body>
+        <div>
+            Modes:
+            <a href="?vanilla">vanilla</a>
+            |
+            <a href="?react">react</a>
+        </div>
+        <br>
+        <div style="border-style: solid; margin: 10px; padding: 10px">
+            <div>
+                This is not a secret:
+                <p id="PUBLIC">
+                    <span> 123 </span>
+                </p>
+            </div>
+            <div>
+                This is a secret:
+                <p id="PRIVATE">
+                    <span> TO BE REPLACED </span>
+                </p>
+            </div>
+        </div>
+    </body>
+</html>

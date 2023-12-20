@@ -1,0 +1,21 @@
+{
+  "name": "lavadome",
+  "version": "0.0.0",
+  "description": "Secure DOM trees isolation and encapsulation leveraging ShadowDOM",
+  "main": "packages/index.mjs",
+  "scripts": {
+    "demo": "serve . -l 3000",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weizman/LavaDome.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/weizman/LavaDome/issues"
+  },
+  "homepage": "https://github.com/weizman/LavaDome#readme"
+}
