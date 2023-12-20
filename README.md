@@ -13,6 +13,16 @@
 
 > ⚠️ EXPERIMENTAL [WIP] - USE AT YOUR OWN RISK ([learn more](#Disclaimers)) 
 
+## Usage
+
+`yarn add @lavamoat/lavadome` or `npm install @lavamoat/lavadome`
+
+TBD
+
+## Develop
+
+`npm && npm install --global serve` or `yarn && yarn global add serve`
+
 ## Motivation
 
 As of today, standards of the web do not offer a way to selectively isolate subtrees 
