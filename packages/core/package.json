@@ -1,0 +1,10 @@
+{
+    "name": "@lavamoat/lavadome-core",
+    "version": "0.0.4",
+    "description": "",
+    "license": "MIT",
+    "scripts": {
+        "demo": "serve . -l 3000"
+    },
+    "main": "src/index.mjs"
+}

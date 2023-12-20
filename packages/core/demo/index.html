@@ -1,0 +1,83 @@
+<html>
+    <head>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🌋</text></svg>">
+        <title>LavaDome (Core) Demo</title>
+        <style>
+            li {
+                padding: 3px 10px;
+            }
+        </style>
+        <script type="module">
+            import {LavaDome as LavaDomeCore} from "../src/index.mjs";
+            top.start = (function() {
+                const secret =
+                    (Math.random() + 1).toString(36).substring(7) +
+                    (Math.random() + 1).toString(36).substring(7) +
+                    (Math.random() + 1).toString(36).substring(7) +
+                    (Math.random() + 1).toString(36).substring(7);
+
+                return function start(root) {
+                    root.innerHTML = '';
+                    const lavadome = new LavaDomeCore(root);
+                    lavadome.text(secret);
+                }
+            }());
+        </script>
+    </head>
+    <body style="max-width: 700px; background-color: #FDDACD " onload="start(PRIVATE)">
+        <div id="content" style="padding: 10px">
+            <h1><a href="https://github.com/lavamoat/LavaDome">LavaDome</a> 🌋</h1>
+            <blockquote>
+                <p style="padding: 10px">
+                    <i>Display sensitive information to the user only you two can access -
+                        <a href="https://github.com/lavamoat/LavaDome#README">learn more</a></i>
+                </p>
+            </blockquote>
+            <h1>Demo</h1>
+            <blockquote>
+                <h3><i>~ Can you bypass LavaDome?</i></h3>
+                <ul>
+                    <li>Open the devtools and run whatever code you want</li>
+                    <li>Use that code to get to the secret part and prove you can access it via JavaScript</li>
+                    <ul>
+                        <li>Do not test the randomness security of the secret - it's not what this is about </li>
+                        <li>You may however assume you know all possible characters the secret may contain</li>
+                    </ul>
+                    <li>
+                        Remember:
+                        <ul>
+                            <li>This is a very new project and is at experimental stage ⚠️</li>
+                            <li>It is not unlikely to find ways to bypass it at this point</li>
+                            <li>USE AT YOUR OWN RISK!</li>
+                            <li>If you found a way around LavaDome, please open an issue</li>
+                        </ul>
+                    </li>
+                </ul>
+            </blockquote>
+        </div>
+
+        <div style="background-color: #FECDBA; border-style: solid; margin: 10px; padding: 10px">
+            <div>
+                This is not a secret:
+                <p id="PUBLIC">
+                    <span> PUBLIC_CONTENT_NOT_ONLY_ACCESSIBLE_TO_LAVADOME </span>
+                </p>
+            </div>
+            <div>
+                This is a secret:
+                <p id="PRIVATE">
+                    <span> TO BE REPLACED </span>
+                </p>
+            </div>
+        </div>
+
+        <blockquote>
+            <i>
+                ~ By
+                <a href="https://github.com/LavaMoat">LavaMoat</a> 🌋 @
+                <a href="https://github.com/MetaMask">MetaMask</a> 🦊 @
+                <a href="https://github.com/consensys">Consensys</a> 💙
+            </i>
+        </blockquote>
+    </body>
+</html>
