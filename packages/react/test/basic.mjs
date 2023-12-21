@@ -8,6 +8,7 @@ describe('test javascript mode', async function () {
             done(document.documentElement.innerText)
         });
         expect(result.includes('PUBLIC_CONTENT_NOT_ONLY_ACCESSIBLE_TO_LAVADOME')).toBeTruthy();
+        expect(result.includes('TO BE REPLACED')).toBeFalsy();
         expect(result.includes('SECRET_CONTENT_ONLY_ACCESSIBLE_TO_LAVADOME')).toBeFalsy();
     });
 });
