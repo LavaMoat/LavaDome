@@ -2,7 +2,7 @@
     "name": "@lavadome/react",
     "version": "0.0.0",
     "description": "",
-    "license": "ISC",
+    "license": "MIT",
     "main": "./build/index.js",
     "scripts": {
         "test": "npm run dev & (npm run test-chrome && npm run test-firefox && npm run test-safari)",
@@ -17,7 +17,6 @@
         "@swc/core": "^1.3.101",
         "@swc/helpers": "^0.5.3",
         "@testing-library/react": "^14.1.2",
-        "csp-html-webpack-plugin": "^5.1.0",
         "css-loader": "^6.8.1",
         "html-loader": "^4.2.0",
         "html-webpack-plugin": "^5.6.0",
