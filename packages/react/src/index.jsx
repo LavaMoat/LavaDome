@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React, { useEffect, useRef } from 'react'
 import { LavaDome as LavaDomeCore } from "@lavamoat/lavadome-core"
 
 export function LavaDome({ text }) {
