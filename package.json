@@ -9,15 +9,7 @@
     "demo"
   ],
   "devDependencies": {
-    "@wdio/cli": "^7.5.3",
-    "@wdio/local-runner": "^7.5.5",
-    "@wdio/mocha-framework": "^7.5.3",
-    "@wdio/spec-reporter": "^7.5.3",
-    "chromedriver": "^119.0.1",
-    "geckodriver": "^3.2.0",
-    "wdio-chromedriver-service": "7.0.0",
-    "wdio-safaridriver-service": "^2.0.0",
-    "wdio-geckodriver-service": "^4.0.0"
+    "jest": "^27.2.4"
   },
   "scripts": {
     "demo": "serve . -l 3000",
