@@ -11,7 +11,7 @@ baseConfig.entry['demo'] = './demo/index.jsx';
 const devtool = process.env.DEVTOOL || 'eval-cheap-module-source-map'
 
 const host = process.env.SERVE_HOST || 'localhost'
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 3000
 
 const config = merge(baseConfig, {
   devtool,

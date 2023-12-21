@@ -5,7 +5,10 @@
     "license": "ISC",
     "main": "./build/index.js",
     "scripts": {
-        "demo": "serve . -l 3000",
+        "test": "yarn dev & (yarn test-chrome && yarn test-firefox && yarn test-safari)",
+        "test-chrome": "../../node_modules/.bin/wdio run chrome.wdio.conf.js",
+        "test-safari": "../../node_modules/.bin/wdio run safari.wdio.conf.js",
+        "test-firefox": "../../node_modules/.bin/wdio run firefox.wdio.conf.js",
         "build": "NODE_ENV=production webpack --config ./webpack.production.js",
         "dev": "NODE_ENV=development webpack serve --config ./webpack.development.js"
     },
