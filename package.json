@@ -25,7 +25,8 @@
     "test": "yarn demo & yarn test-chrome && yarn test-firefox && yarn test-safari",
     "test-chrome": "./node_modules/.bin/wdio run chrome.wdio.conf.js",
     "test-safari": "./node_modules/.bin/wdio run safari.wdio.conf.js",
-    "test-firefox": "./node_modules/.bin/wdio run firefox.wdio.conf.js"
+    "test-firefox": "./node_modules/.bin/wdio run firefox.wdio.conf.js",
+    "react-dev": "NODE_ENV=development yarn workspace @lavadome/react dev"
   },
   "packageManager": "yarn@3.3.0",
   "repository": {
