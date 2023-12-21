@@ -1,7 +1,6 @@
 const { merge } = require('webpack-merge')
 require('webpack-dev-server')
 
-const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const path = require('path')
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
@@ -26,13 +25,6 @@ const config = merge(baseConfig, {
     open: false,
   },
   plugins: [
-    new HtmlWebpackPlugin({
-      inject: true,
-      template: path.resolve(__dirname, './demo/index.html'),
-      hash: true,
-      minify: false,
-    }),
-    new ReactRefreshWebpackPlugin(),
   ],
 })
 
