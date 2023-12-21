@@ -2,10 +2,8 @@
   "name": "lavadome",
   "version": "0.0.0",
   "description": "Secure DOM trees isolation and encapsulation leveraging ShadowDOM",
-  "main": "packages/index.mjs",
   "workspaces": [
-    "packages/*",
-    "demo"
+    "packages/*"
   ],
   "devDependencies": {
     "esbuild": "0.19.8",
