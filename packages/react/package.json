@@ -2,7 +2,7 @@
     "name": "@lavadome/react",
     "version": "0.0.0",
     "description": "",
-    "license": "ISC",
+    "license": "MIT",
     "main": "./build/index.js",
     "scripts": {
         "test": "npm run dev & (npm run test-chrome && npm run test-firefox && npm run test-safari)",
