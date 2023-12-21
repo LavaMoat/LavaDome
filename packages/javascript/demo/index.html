@@ -2,21 +2,7 @@
     <head>
         <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🌋</text></svg>">
         <title>LavaDome (JavaScript) Demo</title>
-        <script>
-            {
-                const local = location.href.split('?')[1] === 'local';
-                const s = document.createElement('script');
-                const path = local ?
-                    "../node_modules/@lavadome/core/src/index.mjs" :
-                    "https://unpkg.com/@lavadome/core/src/index.mjs"
-                s.textContent = `{ "imports": { "@lavadome/core": "${path}" } }`;
-                s.type = 'importmap';
-                document.head.appendChild(s);
-            }
-        </script>
-        <script type="module" src="./index.js"
-                onerror="location.href='?local'" onload="start(PRIVATE)">
-        </script>
+        <script async src="build/index.js" onload="start(PRIVATE)"></script>
     </head>
     <body>
         <div style="border-style: solid; margin: 10px; padding: 10px">

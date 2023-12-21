@@ -5,11 +5,12 @@
     "license": "MIT",
     "main": "src/index.mjs",
     "dependencies": {
-        "@lavadome/core": "file:../core"
+        "@lavadome/core": "^0.0.0"
     },
     "scripts": {
-        "demo": "serve . -l 3000",
-        "test": "yarn demo & yarn test-chrome && yarn test-firefox && yarn test-safari",
+        "build-demo": "../../node_modules/.bin/esbuild demo/index.js --bundle --outfile=demo/build/index.js --allow-overwrite",
+        "demo": "npm run build-demo && serve ./demo -l 3000",
+        "test": "npm run demo & npm run test-chrome && npm run test-firefox && npm run test-safari",
         "test-chrome": "../../node_modules/.bin/wdio run chrome.wdio.conf.js",
         "test-safari": "../../node_modules/.bin/wdio run safari.wdio.conf.js",
         "test-firefox": "../../node_modules/.bin/wdio run firefox.wdio.conf.js"

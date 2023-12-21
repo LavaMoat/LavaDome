@@ -1,4 +1,4 @@
-import {LavaDome as LavaDomeJavaScript} from '../../src/index.mjs';
+import {LavaDome as LavaDomeJavaScript} from '../src/index.mjs';
 
 top.start = (function(){
     const secret = 'SECRET_CONTENT_ONLY_ACCESSIBLE_TO_LAVADOME';

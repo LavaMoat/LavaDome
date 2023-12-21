@@ -5,7 +5,7 @@
     "license": "ISC",
     "main": "./build/index.js",
     "scripts": {
-        "test": "yarn dev & (yarn test-chrome && yarn test-firefox && yarn test-safari)",
+        "test": "npm run dev & (npm run test-chrome && npm run test-firefox && npm run test-safari)",
         "test-chrome": "../../node_modules/.bin/wdio run chrome.wdio.conf.js",
         "test-safari": "../../node_modules/.bin/wdio run safari.wdio.conf.js",
         "test-firefox": "../../node_modules/.bin/wdio run firefox.wdio.conf.js",
@@ -30,7 +30,7 @@
         "webpack-dev-server": "4.15.1"
     },
     "dependencies": {
-        "@lavadome/core": "file:../core",
+        "@lavadome/core": "^0.0.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     }

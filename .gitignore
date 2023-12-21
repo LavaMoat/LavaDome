@@ -5,3 +5,5 @@ dist
 .vscode
 logs
 yarn-error.log
+lavadome.js
+build

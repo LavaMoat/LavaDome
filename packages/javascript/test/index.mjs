@@ -1,4 +1,4 @@
-const base = 'http://localhost:3000/demo/';
+const base = 'http://localhost:3000/';
 
 async function setup() {
     const url = base;
