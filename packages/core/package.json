@@ -1,0 +1,8 @@
+{
+    "name": "@lavadome/core",
+    "version": "0.0.0",
+    "description": "",
+    "license": "MIT",
+    "main": "src/index.mjs",
+    "dependencies": {}
+}

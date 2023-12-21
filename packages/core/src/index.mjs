@@ -50,12 +50,19 @@ const setAttribute = p(Element.prototype, 'setAttribute', 'value');
 const map = p(Array.prototype, 'map', 'value');
 const join = p(Array.prototype, 'join', 'value');
 
+const shadows = new Map();
+
 export class LavaDome {
     constructor(root) {
         this.outer = root;
         this.inner = null;
         this.style = null;
-        this.shadow = attachShadow(this.outer, { mode: 'closed' });
+        this.shadow = shadows.get(this.outer);
+        if (!this.shadow) {
+            this.shadow = attachShadow(this.outer, { mode: 'closed' });
+            shadows.set(this.outer, this.shadow);
+        }
+        this.#empty();
     }
 
     #empty() {

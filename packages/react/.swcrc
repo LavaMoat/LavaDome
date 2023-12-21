@@ -1,0 +1,30 @@
+{
+    "minify": false,
+    "jsc": {
+        "parser": {
+            "syntax": "ecmascript",
+            "jsx": true,
+            "dynamicImport": true,
+            "decorators": true
+        },
+        "target": "esnext",
+        "transform": {
+            "legacyDecorator": true,
+            "decoratorMetadata": true,
+            "react": {
+                "development": true,
+                "refresh": true
+            },
+            "optimizer": {
+                "simplify": true,
+                "globals": {
+                    "vars": {
+                        "__DEBUG__": "false"
+                    }
+                }
+            }
+        },
+        "externalHelpers": false,
+        "loose": false
+    }
+}

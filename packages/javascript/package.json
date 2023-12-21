@@ -1,0 +1,17 @@
+{
+    "name": "@lavadome/javascript",
+    "version": "0.0.0",
+    "description": "",
+    "license": "MIT",
+    "main": "src/index.mjs",
+    "dependencies": {
+        "@lavadome/core": "file:../core"
+    },
+    "scripts": {
+        "demo": "serve . -l 3000",
+        "test": "yarn demo & yarn test-chrome && yarn test-firefox && yarn test-safari",
+        "test-chrome": "../../node_modules/.bin/wdio run chrome.wdio.conf.js",
+        "test-safari": "../../node_modules/.bin/wdio run safari.wdio.conf.js",
+        "test-firefox": "../../node_modules/.bin/wdio run firefox.wdio.conf.js"
+    }
+}
