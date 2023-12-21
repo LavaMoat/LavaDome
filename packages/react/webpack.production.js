@@ -1,5 +1,5 @@
 const { optimize: WebpackOptimize } = require('webpack')
-const { ModuleConcatenationPlugin } = WebpackOptimize
+const { ModuleConcatenationPlugin, LimitChunkCountPlugin } = WebpackOptimize
 
 const { merge } = require('webpack-merge')
 
@@ -13,7 +13,12 @@ const config = merge(baseConfig, {
   optimization: {
     concatenateModules: true,
   },
-  plugins: [new ModuleConcatenationPlugin()],
+  plugins: [
+      new ModuleConcatenationPlugin(),
+      new LimitChunkCountPlugin({
+        maxChunks: 1
+      })
+  ],
 })
 
 module.exports = config

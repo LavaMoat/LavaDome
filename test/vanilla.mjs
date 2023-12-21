@@ -1,7 +1,7 @@
 import {setup} from "./index.mjs"
 
-describe('test vanilla mode', async function () {
-    before(setup.bind(null, 'vanilla'));
+describe('test javascript mode', async function () {
+    before(setup.bind(null, 'javascript'));
 
     it('naively try to steal the secret using innerText', async function () {
         const result = await browser.executeAsync(function(done) {

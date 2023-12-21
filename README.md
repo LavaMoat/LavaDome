@@ -2,11 +2,6 @@
     <h1> LavaDome 🌋️ </h1>
     <i> ~ A new <a href="https://github.com/lavamoat">LavaMoat</a> tool for <b>DOM</b> nodes secured <b>E</b>ncapsulation ~ </i>
     <br/><br/>
-    <img src="https://img.shields.io/npm/v/@lavamoat/lavadome"/>
-    <img src="https://img.shields.io/bundlephobia/min/@lavamoat/lavadome"/>
-    <img src="https://badges.frapsoft.com/javascript/code/javascript.svg?v=101" width="113">
-    <img src="https://img.shields.io/npm/dw/@lavamoat/lavadome"/>
-    <img src="https://img.shields.io/github/license/lavamoat/lavadome"/>
     <br/><br/>
     <br/><br/>
 </div> 
@@ -14,8 +9,6 @@
 > ⚠️ EXPERIMENTAL [WIP] - USE AT YOUR OWN RISK ([learn more](#Disclaimers)) 
 
 ## Usage
-
-`yarn add @lavamoat/lavadome` or `npm install @lavamoat/lavadome`
 
 TBD
 
@@ -123,10 +116,10 @@ In addition, it takes the responsibility of implementing all necessary security 
 to make ShadowDOM feature usage truly secure in contrast to its native nature of not
 being a security feature by default (see [Security](#Security)).
 
-### [Vanilla](./packages/vanilla) / [React](./packages/react) / etc
+### [JavaScript](./packages/javascript) / [React](./packages/react) / etc
 
 Export functionalities for developers to consume LavaDome however they prefer,
-whether by vanilla JavaScript or as a React component 
+whether by javascript JavaScript or as a React component 
 (or any other platform - [ask away!](https://github.com/lavamoat/lavadome/issues/new?title=LavaDome+misses+support+for+...))
 
 > NOTE: Delivering LavaDome support for frameworks integrates third party code

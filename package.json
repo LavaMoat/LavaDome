@@ -17,8 +17,7 @@
     "geckodriver": "^4.3.0",
     "wdio-chromedriver-service": "8.1.1",
     "wdio-safaridriver-service": "^2.1.1",
-    "wdio-geckodriver-service": "^5.0.2",
-    "jest": "^27.2.4"
+    "wdio-geckodriver-service": "^5.0.2"
   },
   "scripts": {
     "demo": "serve . -l 3000",

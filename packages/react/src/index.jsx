@@ -1,13 +1,13 @@
-import React, { StrictMode } from 'react'
+import React, {useEffect, useRef} from 'react'
+import { LavaDome as LavaDomeCore } from "@lavadome/core"
 
-import App from './App'
-import { createRoot } from 'react-dom/client'
+export function LavaDome({ text }) {
+    const containerRef = useRef(null);
 
-const rootNode = document.querySelector('#root')
-if (rootNode) {
-  createRoot(rootNode).render(
-    <StrictMode>
-      <App />
-    </StrictMode>
-  )
+    useEffect(() => {
+        const lavadome = new LavaDomeCore(containerRef.current);
+        lavadome.text(text);
+    }, [text]);
+
+    return <span ref={containerRef}></span>;
 }

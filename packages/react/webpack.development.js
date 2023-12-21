@@ -4,7 +4,9 @@ require('webpack-dev-server')
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin')
 const path = require('path')
 
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const baseConfig = require('./webpack.config')
+baseConfig.entry['demo'] = './demo/index.jsx';
 
 const devtool = process.env.DEVTOOL || 'eval-cheap-module-source-map'
 
@@ -17,13 +19,21 @@ const config = merge(baseConfig, {
     host,
     port,
     static: {
-      directory: path.resolve(__dirname, 'static'),
+      directory: path.resolve(__dirname, 'demo'),
     },
     hot: true,
     liveReload: true,
     open: false,
   },
-  plugins: [new ReactRefreshWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: path.resolve(__dirname, './demo/index.html'),
+      hash: true,
+      minify: false,
+    }),
+    new ReactRefreshWebpackPlugin(),
+  ],
 })
 
 module.exports = config
