@@ -1,2 +1,2 @@
-import { LavaDome as LavaDomeCore } from "@lavadome/core"
+import { LavaDome as LavaDomeCore } from "@lavamoat/lavadome-core"
 export class LavaDome extends LavaDomeCore {}

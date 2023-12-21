@@ -3,11 +3,11 @@ const path = require('path')
 const mode = process.env.NODE_ENV || 'development'
 
 const baseConfig = {
+  // experiments: {outputModule: true},
   mode,
-  entry: {
-    'index': './src/index.jsx',
-  },
+  entry: './src/index.jsx',
   output: {
+    libraryTarget: "commonjs", // "module"
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js',
     clean: true,
@@ -38,7 +38,7 @@ const baseConfig = {
     ],
   },
   optimization: {
-    usedExports: true,
+    usedExports: false,
   },
 }
 

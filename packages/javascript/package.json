@@ -1,11 +1,11 @@
 {
     "name": "@lavamoat/lavadome-javascript",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "",
     "license": "MIT",
     "main": "src/index.mjs",
     "dependencies": {
-        "@lavamoat/lavadome-core": "^0.0.1"
+        "@lavamoat/lavadome-core": "^0.0.2"
     },
     "scripts": {
         "build-demo": "../../node_modules/.bin/esbuild demo/index.js --bundle --outfile=demo/build/index.js --allow-overwrite",
