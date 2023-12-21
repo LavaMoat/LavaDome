@@ -13,7 +13,7 @@
             "decoratorMetadata": true,
             "react": {
                 "development": true,
-                "refresh": true
+                "refresh": false
             },
             "optimizer": {
                 "simplify": true,
