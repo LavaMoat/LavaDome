@@ -1,0 +1,11 @@
+{
+    "name": "@lavadome/core",
+    "version": "0.0.0",
+    "description": "",
+    "license": "ISC",
+    "main": "src/index.mjs",
+    "scripts": {
+        "test": "jest"
+    },
+    "dependencies": {}
+}

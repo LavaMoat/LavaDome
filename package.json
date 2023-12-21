@@ -1,8 +1,13 @@
 {
   "name": "lavadome",
   "version": "0.0.0",
+  "private": "true",
   "description": "Secure DOM trees isolation and encapsulation leveraging ShadowDOM",
   "main": "packages/index.mjs",
+  "workspaces": [
+    "packages/*",
+    "demo"
+  ],
   "devDependencies": {
     "@wdio/cli": "^7.5.3",
     "@wdio/local-runner": "^7.5.5",
@@ -21,6 +26,7 @@
     "test-safari": "./node_modules/.bin/wdio run safari.wdio.conf.js",
     "test-firefox": "./node_modules/.bin/wdio run firefox.wdio.conf.js"
   },
+  "packageManager": "yarn@3.3.0",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lavamoat/LavaDome.git"
