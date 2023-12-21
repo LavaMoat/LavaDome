@@ -1,6 +1,7 @@
 {
   "name": "lavadome",
   "version": "0.0.0",
+  "private": true,
   "description": "Secure DOM trees isolation and encapsulation leveraging ShadowDOM",
   "workspaces": [
     "packages/*"
@@ -14,8 +15,8 @@
     "chromedriver": "119.0.1",
     "geckodriver": "^4.3.0",
     "wdio-chromedriver-service": "8.1.1",
-    "wdio-safaridriver-service": "^2.1.1",
-    "wdio-geckodriver-service": "^5.0.2"
+    "wdio-geckodriver-service": "^5.0.2",
+    "wdio-safaridriver-service": "^2.1.1"
   },
   "repository": {
     "type": "git",

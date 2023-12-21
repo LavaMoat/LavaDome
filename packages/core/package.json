@@ -3,6 +3,5 @@
     "version": "0.0.0",
     "description": "",
     "license": "MIT",
-    "main": "src/index.mjs",
-    "dependencies": {}
+    "main": "src/index.mjs"
 }
