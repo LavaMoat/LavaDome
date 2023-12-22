@@ -5,8 +5,9 @@ const mode = process.env.NODE_ENV || 'development'
 const baseConfig = {
   // experiments: {outputModule: true},
   mode,
+  target: ['web', 'es5'],
   entry: {
-    main: path.resolve(__dirname, 'src/LavaDome.jsx'),
+    main: path.resolve(__dirname, 'src/index.jsx'),
   },
   output: {
     path: path.resolve(__dirname, 'build'),

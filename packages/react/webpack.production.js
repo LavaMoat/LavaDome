@@ -16,6 +16,10 @@ const config = merge(baseConfig, {
   optimization: {
     concatenateModules: true,
   },
+    externals: {
+        react: 'react',
+        reactDOM: 'react-dom'
+    },
   plugins: [
       new ModuleConcatenationPlugin(),
       new LimitChunkCountPlugin({
