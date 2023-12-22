@@ -6,6 +6,7 @@ const {
     Function,
     Math,
     parseInt,
+    Map,
 } = window;
 
 const {
@@ -21,7 +22,11 @@ const css = Object.create(null);
 css['-webkit-user-modify'] = 'unset';
 css['user-select'] = 'none';
 
+const opts = Object.create(null);
+opts.mode = 'closed';
+
 const letters = 'abcdefghijklmnopqrstuvwxyz';
+const nums = '0123456789';
 
 // p stands for primordial
 function p(obj, prop, accessor, type = 'function') {
@@ -33,11 +38,11 @@ function p(obj, prop, accessor, type = 'function') {
     }
 }
 
-function generateRandomString(len = 0, from = letters, fromLength = 26) {
-    let tag = '';
-    for (let i = 0; i < len; i++) {
-        const r = parseInt(random() * (fromLength));
-        tag += letters[r];
+function generateRandomString(len = 1) {
+    let tag = letters[parseInt(random() * (26))];
+    for (let i = 1; i < len; i++) {
+        const r = parseInt(random() * (36));
+        tag += (letters+nums)[r];
     }
     return tag;
 }
@@ -49,19 +54,22 @@ const textContentSet = p(Node.prototype, 'textContent', 'set');
 const innerHTMLSet = p(ShadowRoot.prototype, 'innerHTML', 'set');
 const setAttribute = p(Element.prototype, 'setAttribute', 'value');
 const map = p(Array.prototype, 'map', 'value');
+const split = p(String.prototype, 'split', 'value');
 const join = p(Array.prototype, 'join', 'value');
+const get = p(Map.prototype, 'get', 'value');
+const set = p(Map.prototype, 'set', 'value');
 
 const shadows = new Map();
 
 export function LavaDome(root) {
-    let host = root, inner = null, style = null;
+    let host = root, inner = null;
 
     this.text = text; this.char = char;
 
-    let shadow = shadows.get(host);
+    let shadow = get(shadows, host);
     if (!shadow) {
-        shadow = attachShadow(host, { mode: 'closed' });
-        shadows.set(host, shadow);
+        shadow = attachShadow(host, opts);
+        set(shadows, host, shadow);
     }
 
     empty();
@@ -70,23 +78,11 @@ export function LavaDome(root) {
         innerHTMLSet(shadow, '');
     }
 
-    function resetStyle(tag, id, clas) {
-        style = createElement(document, 'style');
-        const s = join(map(entries(css), ([k,v]) => `${k}: ${v} !important`), '; ');
-        textContentSet(style, `${tag}#${id}.${clas} { ${style} }`);
-        appendChild(shadow, style);
-        return s;
-    }
-
     function reset() {
         empty();
         const tag = generateRandomString(7);
-        const id = generateRandomString(7);
-        const clas = generateRandomString(7);
-        const style = resetStyle(tag, id, clas);
+        const style = join(map(entries(css), ([k,v]) => `${k}: ${v} !important`), '; ');
         inner = createElement(document, tag);
-        setAttribute(inner, 'id', id);
-        setAttribute(inner, 'class', clas);
         setAttribute(inner, 'style', style);
     }
 
@@ -102,13 +98,13 @@ export function LavaDome(root) {
 
     function text(text) {
         init();
-        const chars = text.split('');
+        const chars = split(text, '');
         for (let i = 0; i < chars.length; i++) {
             const char = chars[i];
-            const s = document.createElement('span');
+            const s = createElement(document, 'span');
             const ld = new LavaDome(s);
             ld.char(char);
-            inner.appendChild(s);
+            appendChild(inner, s);
         }
     }
 }

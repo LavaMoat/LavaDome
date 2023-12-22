@@ -249,6 +249,29 @@ make the ShadowDOM elements contenteditable and vulnerable to this attack vector
 Needless to say that the other technique of using `contenteditable` as an attribute
 isn't currently relevant as LavaDome does not support accepting actual DOM nodes by design.
 
+#### Selectability
+
+The attack vectors above aren't so useful if `getSelection` is mitigated.
+By making the text inside LavaDome non-selectable, we harden the security against
+possible injection as demonstrated before. This works well in Chromium but less in Firefox.
+
+### Secret splitting
+
+The problem is, if an attacker manages to somehow guess a subset of the secret,
+they can compromise it entirely (assuming `getSelection` captures scoped nodes
+like in Firefox), because it will leak the text node that includes the subset
+which is in fact the entire secret.
+
+To fight that off, LavaDome stores each character of the secret in a ShadowDOM
+of its own, so that compromising a subset does not compromise the rest.
+
+This means that the longer the secret is and the more char options it may
+potentially include, it gets exponential harder for attackers to leak it all.
+
+It's still possible, because an attacker can still attempt to find all possible chars
+one by one, leak all shadows they find, and then reorder them correctly,
+according to their order within the LavaDome main host - all synchronously.
+
 ### Defensive coding
 
 Hard to achieve an actual secured solution without writing the code defensively.
