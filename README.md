@@ -10,7 +10,29 @@
 
 ## Usage
 
-TBD
+LavaDome currently supports 
+[Vanilla](./packages/javascript) JavaScript and 
+[React](./packages/react) (and hopefully more in the future)
+
+### [Vanilla JavaScript](./packages/javascript)
+
+```javascript
+import {LavaDome as LavaDomeJavaScript} from '@lavamoat/lavadome-javascript';
+
+const root = document.getElementById('root');
+const lavadome = new LavaDomeJavaScript(root);
+lavadome.text(secret);
+```
+
+### [React](./packages/react)
+
+```javascript
+import {LavaDome as LavaDomeRect} from '@lavamoat/lavadome-react';
+
+function Secret({text}) {
+    return <LavaDomeReact text={text} />
+}
+```
 
 ## Develop
 
