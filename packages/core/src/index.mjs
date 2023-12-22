@@ -19,6 +19,7 @@ const {
 
 const css = Object.create(null);
 css['-webkit-user-modify'] = 'unset';
+css['user-select'] = 'none';
 
 const letters = 'abcdefghijklmnopqrstuvwxyz';
 
@@ -94,8 +95,20 @@ export class LavaDome {
         appendChild(this.shadow, this.inner);
     }
 
+    char(char) {
+        this.#init();
+        textContentSet(this.inner, char);
+    }
+
     text(text) {
         this.#init();
-        textContentSet(this.inner, text);
+        const chars = text.split('');
+        for (let i = 0; i < chars.length; i++) {
+            const char = chars[i];
+            const s = document.createElement('span');
+            const ld = new LavaDome(s);
+            ld.char(char);
+            this.inner.appendChild(s);
+        }
     }
 }
