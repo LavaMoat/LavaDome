@@ -1,4 +1,5 @@
 import React from 'react'
+import { LavaDome as LavaDomeReact } from '../src/LavaDome'
 
 export default function App() {
     return (
@@ -11,9 +12,7 @@ export default function App() {
             </div>
             <div>
                 This is a secret:
-                <p id="PRIVATE">
-                    <span> TO_BE_REPLACED </span>
-                </p>
+                <LavaDomeReact text={'SECRET_CONTENT_ONLY_ACCESSIBLE_TO_LAVADOME'} />
             </div>
         </div>
     )
