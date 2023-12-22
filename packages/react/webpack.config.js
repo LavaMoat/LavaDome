@@ -6,7 +6,7 @@ const baseConfig = {
   // experiments: {outputModule: true},
   mode,
   entry: {
-    lavadome: path.resolve(__dirname, 'src/LavaDome.jsx'),
+    main: path.resolve(__dirname, 'src/LavaDome.jsx'),
   },
   output: {
     path: path.resolve(__dirname, 'build'),
@@ -22,6 +22,7 @@ const baseConfig = {
       {
         test: /\.jsx?$/i,
         loader: 'swc-loader',
+        exclude: [],
       },
       {
         test: /\.(sa|s?c)ss$/i,
