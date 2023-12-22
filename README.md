@@ -1,5 +1,6 @@
 <div align="center">
     <h1> LavaDome 🌋️ </h1>
+    <br>
     <i> ~ A new <a href="https://github.com/lavamoat">LavaMoat</a> tool for <b>DOM</b> nodes secured <b>E</b>ncapsulation ~ </i>
 </div> 
 
