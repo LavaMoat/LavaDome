@@ -5,7 +5,9 @@ const mode = process.env.NODE_ENV || 'development'
 const baseConfig = {
   // experiments: {outputModule: true},
   mode,
-  entry: './src/index.jsx',
+  entry: {
+    lavadome: path.resolve(__dirname, 'src/LavaDome.jsx'),
+  },
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js',
