@@ -8,6 +8,13 @@
 
 > ⚠️ EXPERIMENTAL [WIP] - USE AT YOUR OWN RISK ([learn more](#Disclaimers)) 
 
+## Demo
+
+<details>
+<summary><a href="https://lavamoat.github.io/LavaDome/packages/core/demo/">https://lavamoat.github.io/LavaDome/packages/core/demo/</a></summary>
+<img width="670" src="./assets/img4.png" alt="LavaDome DEMO"/>
+</details>
+
 ## Usage
 
 LavaDome currently supports 
