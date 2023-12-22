@@ -7,7 +7,6 @@ const baseConfig = {
   mode,
   entry: './src/index.jsx',
   output: {
-    libraryTarget: "commonjs", // "module"
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js',
     clean: true,
