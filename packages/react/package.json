@@ -1,0 +1,39 @@
+{
+    "name": "@lavamoat/lavadome-react",
+    "version": "0.0.4",
+    "description": "",
+    "license": "MIT",
+    "main": "./build/main.js",
+    "scripts": {
+        "test": "npm run dev & (npm run test-chrome && npm run test-firefox && npm run test-safari)",
+        "test-chrome": "../../node_modules/.bin/wdio run chrome.wdio.conf.js",
+        "test-safari": "../../node_modules/.bin/wdio run safari.wdio.conf.js",
+        "test-firefox": "../../node_modules/.bin/wdio run firefox.wdio.conf.js",
+        "build": "NODE_ENV=production webpack --config ./webpack.production.js",
+        "dev": "NODE_ENV=development webpack serve --config ./webpack.development.js"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.23.6",
+        "@swc/core": "^1.3.101",
+        "@swc/helpers": "^0.5.3",
+        "@testing-library/react": "^12.1.2",
+        "babel-loader": "^8.2.2",
+        "css-loader": "^6.8.1",
+        "html-loader": "^4.2.0",
+        "html-webpack-plugin": "^5.6.0",
+        "jsdom": "^23.0.1",
+        "jsdom-global": "^3.0.2",
+        "react-refresh": "^0.14.0",
+        "swc-loader": "^0.2.3",
+        "webpack": "^5.89.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "4.15.1"
+    },
+    "dependencies": {
+        "@lavamoat/lavadome-core": "^0.0.4"
+    },
+    "peerDependencies": {
+        "react": "^16.12.0",
+        "react-dom": "^16.12.0"
+    }
+}

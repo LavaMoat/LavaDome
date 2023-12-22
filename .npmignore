@@ -1,0 +1,8 @@
+node_modules
+output
+dist
+.idea
+.vscode
+logs
+yarn-error.log
+lavadome.js

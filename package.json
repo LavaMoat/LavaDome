@@ -1,0 +1,32 @@
+{
+  "name": "lavadome",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Secure DOM trees isolation and encapsulation leveraging ShadowDOM",
+  "workspaces": [
+    "packages/*"
+  ],
+  "devDependencies": {
+    "esbuild": "0.19.8",
+    "@wdio/cli": "^8.27.0",
+    "@wdio/local-runner": "^8.27.0",
+    "@wdio/mocha-framework": "^8.27.0",
+    "@wdio/spec-reporter": "^8.27.0",
+    "chromedriver": "119.0.1",
+    "geckodriver": "^4.3.0",
+    "wdio-chromedriver-service": "8.1.1",
+    "wdio-geckodriver-service": "^5.0.2",
+    "wdio-safaridriver-service": "^2.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lavamoat/LavaDome.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lavamoat/LavaDome/issues"
+  },
+  "homepage": "https://github.com/lavamoat/LavaDome#readme"
+}
