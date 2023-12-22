@@ -284,6 +284,9 @@ was done out of having defensive coding in mind.
 As long as we remain in the realms of Vanilla JavaScript, defensive coding is something
 we can (do our very best to) control.
 
+Which is why it's **crucial** LavaDome is included in the app before any scripts
+you don't trust, preferably before ALL scripts!
+
 However, when using the framework versions of LavaDome, this means these 
 frameworks aren't defensively written which means the native APIs they make use
 of aren't safe from malicious interference - and that is out of LavaDome's control.
