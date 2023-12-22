@@ -5,9 +5,11 @@ const mode = process.env.NODE_ENV || 'development'
 const baseConfig = {
   // experiments: {outputModule: true},
   mode,
-  entry: './src/index.jsx',
+  target: ['web', 'es5'],
+  entry: {
+    main: path.resolve(__dirname, 'src/index.jsx'),
+  },
   output: {
-    libraryTarget: "commonjs", // "module"
     path: path.resolve(__dirname, 'build'),
     filename: '[name].js',
     clean: true,
@@ -21,6 +23,7 @@ const baseConfig = {
       {
         test: /\.jsx?$/i,
         loader: 'swc-loader',
+        exclude: [],
       },
       {
         test: /\.(sa|s?c)ss$/i,

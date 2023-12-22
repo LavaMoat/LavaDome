@@ -5,7 +5,7 @@ const path = require('path')
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const baseConfig = require('./webpack.config')
-baseConfig.entry['demo'] = './demo/index.jsx';
+baseConfig.entry['demo'] = path.resolve(__dirname, 'demo/index.js');
 
 const devtool = process.env.DEVTOOL || 'eval-cheap-module-source-map'
 
@@ -25,6 +25,10 @@ const config = merge(baseConfig, {
     open: false,
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      inject: true,
+      template: path.resolve(__dirname, 'demo/index.html'),
+    })
   ],
 })
 

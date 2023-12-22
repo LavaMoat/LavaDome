@@ -53,62 +53,62 @@ const join = p(Array.prototype, 'join', 'value');
 
 const shadows = new Map();
 
-export class LavaDome {
-    constructor(root) {
-        this.outer = root;
-        this.inner = null;
-        this.style = null;
-        this.shadow = shadows.get(this.outer);
-        if (!this.shadow) {
-            this.shadow = attachShadow(this.outer, { mode: 'closed' });
-            shadows.set(this.outer, this.shadow);
-        }
-        this.#empty();
+export function LavaDome(root) {
+    let host = root, inner = null, style = null;
+
+    this.text = text; this.char = char;
+
+    let shadow = shadows.get(host);
+    if (!shadow) {
+        shadow = attachShadow(host, { mode: 'closed' });
+        shadows.set(host, shadow);
     }
 
-    #empty() {
-        innerHTMLSet(this.shadow, '');
+    empty();
+
+    function empty() {
+        innerHTMLSet(shadow, '');
     }
 
-    #resetStyle(tag, id, clas) {
-        this.style = createElement(document, 'style');
-        const style = join(map(entries(css), ([k,v]) => `${k}: ${v} !important`), '; ');
-        textContentSet(this.style, `${tag}#${id}.${clas} { ${style} }`);
-        appendChild(this.shadow, this.style);
-        return style;
+    function resetStyle(tag, id, clas) {
+        style = createElement(document, 'style');
+        const s = join(map(entries(css), ([k,v]) => `${k}: ${v} !important`), '; ');
+        textContentSet(style, `${tag}#${id}.${clas} { ${style} }`);
+        appendChild(shadow, style);
+        return s;
     }
 
-    #reset() {
-        this.#empty();
+    function reset() {
+        empty();
         const tag = generateRandomString(7);
         const id = generateRandomString(7);
         const clas = generateRandomString(7);
-        const style = this.#resetStyle(tag, id, clas);
-        this.inner = createElement(document, tag);
-        setAttribute(this.inner, 'id', id);
-        setAttribute(this.inner, 'class', clas);
-        setAttribute(this.inner, 'style', style);
+        const style = resetStyle(tag, id, clas);
+        inner = createElement(document, tag);
+        setAttribute(inner, 'id', id);
+        setAttribute(inner, 'class', clas);
+        setAttribute(inner, 'style', style);
     }
 
-    #init() {
-        this.#reset();
-        appendChild(this.shadow, this.inner);
+    function init() {
+        reset();
+        appendChild(shadow, inner);
     }
 
-    char(char) {
-        this.#init();
-        textContentSet(this.inner, char);
+    function char(char) {
+        init();
+        textContentSet(inner, char);
     }
 
-    text(text) {
-        this.#init();
+    function text(text) {
+        init();
         const chars = text.split('');
         for (let i = 0; i < chars.length; i++) {
             const char = chars[i];
             const s = document.createElement('span');
             const ld = new LavaDome(s);
             ld.char(char);
-            this.inner.appendChild(s);
+            inner.appendChild(s);
         }
     }
 }
