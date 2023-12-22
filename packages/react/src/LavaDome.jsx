@@ -4,8 +4,8 @@ import { LavaDomeShadow } from "./LavaDomeShadow"
 export const LavaDome = ({ text }) => {
   const hostRef = useRef(null)
   return (
-    <div ref={hostRef}>
+    <span ref={hostRef}>
       <LavaDomeShadow text={text} hostRef={hostRef} />
-    </div>
+    </span>
   )
 };

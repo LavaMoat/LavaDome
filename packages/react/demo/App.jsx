@@ -12,7 +12,9 @@ export default function App() {
             </div>
             <div>
                 This is a secret:
-                <LavaDomeReact text={'SECRET_CONTENT_ONLY_ACCESSIBLE_TO_LAVADOME'} />
+                <p id="PRIVATE">
+                    <LavaDomeReact text={'SECRET_CONTENT_ONLY_ACCESSIBLE_TO_LAVADOME'} />
+                </p>
             </div>
         </div>
     )

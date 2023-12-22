@@ -6,6 +6,7 @@ const path = require('path')
 
 const baseConfig = require('./webpack.config')
 baseConfig.module.rules[0].exclude.push(path.resolve(__dirname, 'demo'))
+baseConfig.output.libraryTarget = "commonjs"; // "module"
 
 const devtool = process.env.DEVTOOL || 'nosources-source-map'
 

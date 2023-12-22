@@ -3,7 +3,7 @@
     "version": "0.0.2",
     "description": "",
     "license": "MIT",
-    "main": "./build/main.js",
+    "main": "./build/lavadome.js",
     "scripts": {
         "test": "npm run dev & (npm run test-chrome && npm run test-firefox && npm run test-safari)",
         "test-chrome": "../../node_modules/.bin/wdio run chrome.wdio.conf.js",
