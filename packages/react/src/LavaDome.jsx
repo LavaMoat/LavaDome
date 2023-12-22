@@ -1,13 +1,11 @@
-import React, { useEffect, useRef } from 'react'
-import { LavaDome as LavaDomeCore } from "@lavamoat/lavadome-core"
+import React, { useRef } from 'react'
+import { LavaDomeShadow } from "./LavaDomeShadow"
 
-export function LavaDome({ text }) {
-    const containerRef = useRef(null);
-
-    useEffect(() => {
-        const lavadome = new LavaDomeCore(containerRef.current);
-        lavadome.text(text);
-    }, [text]);
-
-    return <span ref={containerRef}></span>;
-}
+export const LavaDome = ({ text }) => {
+  const hostRef = useRef(null)
+  return (
+    <div ref={hostRef}>
+      <LavaDomeShadow text={text} hostRef={hostRef} />
+    </div>
+  )
+};
