@@ -1,12 +1,10 @@
 import React, { StrictMode } from 'react'
 
 import App from './App'
-import { createRoot } from 'react-dom/client'
+import ReactDOM from 'react-dom'
 
 top.start = function start(root) {
-    createRoot(root).render(
-        <StrictMode>
-            <App />
-        </StrictMode>
-    )
+    ReactDOM.render(<StrictMode>
+        <App />
+    </StrictMode>, root)
 }

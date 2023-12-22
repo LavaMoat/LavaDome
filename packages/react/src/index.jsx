@@ -21,4 +21,6 @@ function LavaDomeShadow({ text, hostRef }) {
     useEffect(() => {
         lavadome.current.text(text);
     }, [text]);
+
+    return <></>
 }
