@@ -116,7 +116,7 @@ In addition, it takes the responsibility of implementing all necessary security 
 
 ### [JavaScript](./packages/javascript) / [React](./packages/react) / etc
 
-Export functionalities for developers to consume **`LavaDome`** however they prefer, whether by javascript JavaScript or as a React component (or any other platform - [ask away!](https://github.com/lavamoat/lavadome/issues/new?title=**`LavaDome`**+misses+support+for+...))
+Export functionalities for developers to consume **`LavaDome`** however they prefer, whether by JavaScript or as a React component (or any other platform - [ask away!](https://github.com/lavamoat/lavadome/issues/new?title=**`LavaDome`**+misses+support+for+...))
 > NOTE: Delivering **`LavaDome`** support for frameworks integrates third party code that we do not control, which causes "security blank spots".
 
 > Please read the [Security](#Security) section to learn how to remain as safe as possible when using **`LavaDome`** with third-party frameworks.
