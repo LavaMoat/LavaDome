@@ -12,6 +12,8 @@ const {
 const {
     getOwnPropertyDescriptor,
     entries,
+    assign,
+    create,
 } = Object;
 
 const {
@@ -22,11 +24,15 @@ const css = Object.create(null);
 css['-webkit-user-modify'] = 'unset';
 css['-webkit-user-select'] = css['user-select'] = 'none';
 
-const opts = Object.create(null);
-opts.mode = 'closed';
+const mode = Object.create(null);
+mode.mode = 'closed';
 
 const letters = 'abcdefghijklmnopqrstuvwxyz';
 const nums = '0123456789';
+
+const distraction = `<span style="top: -10px; right: -10px; font-size: 1px; position: fixed;">
+        abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()?.;:[]{}+=-_/
+    </span>`;
 
 // p stands for primordial
 function p(obj, prop, accessor, type = 'function') {
@@ -47,6 +53,12 @@ function generateRandomString(len = 1) {
     return tag;
 }
 
+function handleOpts(opts = create(null)) {
+    return assign(create(null), {
+        internal: false,
+    });
+}
+
 const attachShadow = p(Element.prototype, 'attachShadow', 'value');
 const createElement = p(Document.prototype, 'createElement', 'value');
 const appendChild = p(Node.prototype, 'appendChild', 'value');
@@ -61,21 +73,25 @@ const set = p(Map.prototype, 'set', 'value');
 
 const shadows = new Map();
 
-export function LavaDome(root) {
+export function LavaDome(root, opts) {
+    return new LavaDomeInternal(root, handleOpts(opts));
+}
+
+function LavaDomeInternal(root, opts) {
     let host = root, inner = null;
 
     this.text = text; this.char = char;
 
     let shadow = get(shadows, host);
     if (!shadow) {
-        shadow = attachShadow(host, opts);
+        shadow = attachShadow(host, mode);
         set(shadows, host, shadow);
     }
 
     empty();
 
     function empty() {
-        innerHTMLSet(shadow, '');
+        innerHTMLSet(shadow, opts.internal ? '' : distraction);
     }
 
     function reset() {
@@ -102,7 +118,7 @@ export function LavaDome(root) {
         for (let i = 0; i < chars.length; i++) {
             const char = chars[i];
             const s = createElement(document, 'span');
-            const ld = new LavaDome(s);
+            const ld = new LavaDomeInternal(s, {internal: true});
             ld.char(char);
             appendChild(inner, s);
         }
