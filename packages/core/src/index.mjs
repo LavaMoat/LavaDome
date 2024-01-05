@@ -20,7 +20,7 @@ const {
 
 const css = Object.create(null);
 css['-webkit-user-modify'] = 'unset';
-css['user-select'] = 'none';
+css['-webkit-user-select'] = css['user-select'] = 'none';
 
 const opts = Object.create(null);
 opts.mode = 'closed';
