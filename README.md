@@ -142,9 +142,9 @@ While the `ShadowDom` API is not officially endorsed as a security tool by its c
 
 We believe that by carefully addressing those very scenarios, `ShadowDom` can be augmented into a secured DOM encapsulation API (worth a shot).
 
-### `ShadowDom` security gaps
+### Threats
 
-It's important to address the current security threats that exist with `ShadowDom`.
+It's important to address the current security threats that exist with `ShadowDom` based solution such as `LavaDome`.
 
 #### 1. Injection
 
@@ -154,7 +154,7 @@ To prevent this possibility, **`LavaDome`** does not accept DOM nodes at all int
 
 We'd love to revisit this decision in the future as we research a stable and secure means of supporting DOM node and subtree input.
 
-#### 2. [window.find()](https://blog.ankursundara.com/shadow-dom/#introducing-windowfind-and-text-selections)
+#### 2. Findability ([window.find()](https://blog.ankursundara.com/shadow-dom/#introducing-windowfind-and-text-selections))
 
 This API allows developers to find and extract DOM nodes by searching for text that they contain. This is the only API that has so far been known to successfully leak DOM nodes from within a `ShadowDom`.
 
@@ -222,7 +222,7 @@ To defend against this attack vector, **`LavaDome`** removes all style attribute
 
 The second technique of using `contenteditable` as an attribute isn't currently relevant as **`LavaDome`** does not support accepting DOM nodes.
 
-#### 3. Selectability
+#### 3. Selectability ([getSelection](https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection))
 
 The attack vectors above aren't so useful if `getSelection` is mitigated. By making the text contained in **`LavaDome`** non-selectable, we harden the security against possible injection as demonstrated above. This works well in Chromium but we are working out some issues with Firefox.
 
@@ -234,9 +234,17 @@ As a countermeasure, **`LavaDome`** stores each character of the secret in its o
 
 A breach is still possible, but only if the attacker brute-forces all possible characters one by one, leaks all of the shadows they find, and then synchronously reorders all of the shadows correctly to align with their respective positions within the **`LavaDome`** main host.
 
-> NOTICE: This technique was proven to be possible (see [#15](https://github.com/LavaMoat/LavaDome/issues/15#issuecomment-1873375440)), but only in Firefox.
+> NOTICE: This technique was proven to be possible against LavaDome (see [#15](https://github.com/LavaMoat/LavaDome/issues/15#issuecomment-1873375440)), but only in Firefox.
 
-### Defensive coding
+#### 5. Side channeling
+
+Another well known attack is to leak contents of ShadowDOMs using inheritable CSS properties such as `@font-face` to a remote server, character by character.
+
+To address that, LavaDome adds to the parent Shadow all characters possible, so that such leaking attempt is confused when finding all possible characters, leaving this attack useless.
+
+> NOTICE: This technique was proven to be possible against LavaDome (see [#16](https://github.com/LavaMoat/LavaDome/issues/16#issue-2067572697))
+
+#### 6. Defensive coding
 
 A secure solution requires defensive coding practices.
 
