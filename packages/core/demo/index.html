@@ -10,11 +10,9 @@
         <script type="module">
             import {LavaDome as LavaDomeCore} from "../src/index.mjs";
             top.start = (function() {
-                const secret =
-                    (Math.random() + 1).toString(36).substring(7) +
-                    (Math.random() + 1).toString(36).substring(7) +
-                    (Math.random() + 1).toString(36).substring(7) +
-                    (Math.random() + 1).toString(36).substring(7);
+                const blobURL = URL.createObjectURL(new Blob());
+                const secret = blobURL.split('/')[3].split('-').join('');
+                URL.revokeObjectURL(blobURL);
 
                 return function start(root) {
                     root.innerHTML = '';
