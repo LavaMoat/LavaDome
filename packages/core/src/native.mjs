@@ -15,7 +15,7 @@ const { from } = Array;
 const {random } = Math;
 const { stringify } = JSON;
 
-// n stands for native (as in native/builtin API)
+// native generation util
 const n = (obj, prop, accessor) =>
     Function.prototype.call.bind(getOwnPropertyDescriptor(obj, prop)[accessor]);
 
