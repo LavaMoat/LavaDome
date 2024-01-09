@@ -3,7 +3,7 @@
 const {
     Object, Array,
     Function, Math,
-    parseInt, Map,
+    parseInt, WeakMap,
     Error, JSON,
 } = window;
 const {
@@ -29,15 +29,15 @@ export const map = n(Array.prototype, 'map', 'value');
 export const join = n(Array.prototype, 'join', 'value');
 export const keys = n(Array.prototype, 'keys', 'value');
 export const at = n(Array.prototype, 'at', 'value');
-export const get = n(Map.prototype, 'get', 'value');
-export const set = n(Map.prototype, 'set', 'value');
+export const get = n(WeakMap.prototype, 'get', 'value');
+export const set = n(WeakMap.prototype, 'set', 'value');
 export const toFixed = n(Number.prototype, 'toFixed', 'value')
 
 export {
     // window
     Object, Array,
     Function, Math,
-    parseInt, Map,
+    parseInt, WeakMap,
     Error, JSON,
     // Object
     defineProperties,

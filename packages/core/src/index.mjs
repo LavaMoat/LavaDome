@@ -1,7 +1,7 @@
 'use strict';
 
 import {
-    Map, Error,
+    WeakMap, Error,
     defineProperties,
     from, stringify,
     attachShadow,
@@ -12,7 +12,7 @@ import {
 } from './native.mjs';
 import {distraction, unselectable} from './element.mjs';
 
-const shadows = new Map();
+const shadows = new WeakMap();
 
 export function LavaDome(host) {
     // make exported API tamper-proof
