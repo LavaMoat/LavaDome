@@ -8,7 +8,7 @@
             }
         </style>
         <script type="module">
-            import {LavaDome as LavaDomeCore} from "../src/index.mjs";
+            import {LavaDome as LavaDomeCore, LavaDomeDebug} from "../src/index.mjs";
             top.start = (function() {
                 const unsafeOpenModeShadow = location.href.includes('unsafeOpenModeShadow');
 
@@ -22,6 +22,11 @@
                         unsafeOpenModeShadow,
                     });
                     lavadome.text(secret);
+                    console.log(
+                        'DEMO(LavaDomeDebug):',
+                        `Since 'unsafeOpenModeShadow' is ${unsafeOpenModeShadow ? 'ENABLED' : 'DISABLED'}, here's the secret:`,
+                        `'${LavaDomeDebug.getTextByRoot(root)}'`,
+                    );
                 }
             }());
         </script>
