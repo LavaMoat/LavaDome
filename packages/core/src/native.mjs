@@ -7,9 +7,9 @@ const {
     Error, JSON,
 } = window;
 const {
-    defineProperties,
+    defineProperties, assign,
     getOwnPropertyDescriptor,
-    entries,
+    entries, create, hasOwn,
 } = Object;
 const { from } = Array;
 const {random } = Math;
@@ -40,9 +40,9 @@ export {
     parseInt, WeakMap,
     Error, JSON,
     // Object
-    defineProperties,
+    defineProperties, assign,
     getOwnPropertyDescriptor,
-    entries,
+    entries, create, hasOwn,
     // Array
     from,
     // Math
