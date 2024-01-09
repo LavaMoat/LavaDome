@@ -18,6 +18,23 @@
 </div>
 </details>
 
+## Motivation
+
+Under today's web standards, there is no established way to selectively isolate DOM subtrees in a **secured manner**. In other words, we can't control access to sections of the DOM by granting access for some parties while blocking access for others if they share the same JavaScript execution environment.
+
+We live in a world where we can **no longer trust the code in our own apps**, and same-origin execution does not guarantee safety. To secure secrets in the frontend, we must be able to present content to the user while ensuring that it cannot be compromised by JavaScript code running under the same origin.
+
+## Example
+
+<details>
+<summary>One use case for such a feature is MetaMask's "show private key" toggle, which exports the private key into plaintext upon user request. <i>(click to expand)</i></summary>
+<br><div align="center"><img width="450" src="./assets/img1.png" alt="Show private key feature by MetaMask"/></div>
+</details>
+
+Currently, this sensitive content is simply attached to the DOM once it is exported, making it **fully accessible to all entities** running in the same app. That is, sections of the code that shouldn't have access to the private key could **easily extract it in plaintext**, so long as the malicious code has access to the DOM.
+
+But rest assured. **We believe this is a [solvable problem 👇](#Solution).**
+
 ## Usage
 
 **`LavaDome`** currently supports [Vanilla JavaScript](./packages/javascript) and [React](./packages/react) (with more on the way)
@@ -97,23 +114,6 @@ npm install && npm install --global serve
 ```bash
 yarn install && yarn global add serve
 ```
-
-## Motivation
-
-Under today's web standards, there is no established way to selectively isolate DOM subtrees in a **secured manner**. In other words, we can't control access to sections of the DOM by granting access for some parties while blocking access for others if they share the same JavaScript execution environment.
-
-We live in a world where we can **no longer trust the code in our own apps**, and same-origin execution does not guarantee safety. To secure secrets in the frontend, we must be able to present content to the user while ensuring that it cannot be compromised by JavaScript code running under the same origin.
-
-## Example
-
-<details>
-<summary>One use case for such a feature is MetaMask's "show private key" toggle, which exports the private key into plaintext upon user request. <i>(click to expand)</i></summary>
-<br><div align="center"><img width="450" src="./assets/img1.png" alt="Show private key feature by MetaMask"/></div>
-</details>
-
-Currently, this sensitive content is simply attached to the DOM once it is exported, making it **fully accessible to all entities** running in the same app. That is, sections of the code that shouldn't have access to the private key could **easily extract it in plaintext**, so long as the malicious code has access to the DOM.
-
-But rest assured. **We believe this is a solvable problem.**
 
 ## Solution
 
