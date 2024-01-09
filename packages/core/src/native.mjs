@@ -9,7 +9,7 @@ const {
 const {
     defineProperties,
     getOwnPropertyDescriptor,
-    entries,
+    entries, create, hasOwn,
 } = Object;
 const { from } = Array;
 const {random } = Math;
@@ -42,7 +42,7 @@ export {
     // Object
     defineProperties,
     getOwnPropertyDescriptor,
-    entries,
+    entries, create, hasOwn,
     // Array
     from,
     // Math

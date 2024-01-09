@@ -10,13 +10,17 @@
         <script type="module">
             import {LavaDome as LavaDomeCore} from "../src/index.mjs";
             top.start = (function() {
+                const unsafeOpenModeShadow = location.href.includes('unsafeOpenModeShadow');
+
                 const blobURL = URL.createObjectURL(new Blob());
                 const secret = blobURL.split('/')[3].split('-').join('');
                 URL.revokeObjectURL(blobURL);
 
                 return function start(root) {
                     root.innerHTML = '';
-                    const lavadome = new LavaDomeCore(root);
+                    const lavadome = new LavaDomeCore(root, {
+                        unsafeOpenModeShadow,
+                    });
                     lavadome.text(secret);
                 }
             }());
