@@ -65,7 +65,7 @@ function Secret({ text }) {
 
 ### Testing
 
-To integrate LavaDome into your testing environment too, you can unsafely set `@unsafeOpenModeShadow` to `true` to make the shadow LavaDome uses `{mode:open}`.
+To integrate `LavaDome` into your testing environment too, you can unsafely set `@unsafeOpenModeShadow` to `true` to make the shadow `LavaDome` uses `{mode:open}`.
 
 Once you did that, you'd be able to import `@lavamoat/lavadome-core`'s `LavaDomeDebug` API:
 
@@ -82,7 +82,9 @@ new LavaDomeJavaScript(root, {
 LavaDomeDebug.getTextByRoot(root) === '123456'; // true
 ```
 
-> Remember: `@unsafeOpenModeShadow` option is UNSAFE to use, and should be enabled only to serve testing/debugging purposes - never use in production!
+This works because `@unsafeOpenModeShadow=true` sets shadows to be `{mode:open}` instead of `{mode:closed}` which makes their content accessible from outside, which effectively also removes the whole purpose `LavaDome` comes to serve, and therefore:
+
+> Remember: `@unsafeOpenModeShadow` option is UNSAFE to use, and should be enabled only to serve testing/debugging purposes - **never use in production!**
 
 ## Develop
 
