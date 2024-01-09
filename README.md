@@ -42,6 +42,48 @@ function Secret({ text }) {
 }
 ```
 
+### API
+
+In addition to the root node, all constructors accept optional options 2nd argument:
+
+```javascript
+// javascript
+new LavaDomeJavaScript(root, {
+    // boolean
+    unsafeOpenModeShadow: false,
+});
+
+// react
+function Secret({ text }) {
+    return <LavaDomeReact
+        text={text}
+        // boolean
+        unsafeOpenModeShadow={false}
+    />
+}
+```
+
+### Testing
+
+To integrate LavaDome into your testing environment too, you can unsafely set `@unsafeOpenModeShadow` to `true` to make the shadow LavaDome uses `{mode:open}`.
+
+Once you did that, you'd be able to import `@lavamoat/lavadome-core`'s `LavaDomeDebug` API:
+
+```javascript
+import { LavaDomeDebug } from '@lavamoat/lavadome-core';
+```
+
+And then use its debugging util functions for your needs:
+
+```javascript
+new LavaDomeJavaScript(root, {
+    unsafeOpenModeShadow: true,
+}).text('123456');
+LavaDomeDebug.getTextByRoot(root) === '123456'; // true
+```
+
+> Remember: `@unsafeOpenModeShadow` option is UNSAFE to use, and should be enabled only to serve testing/debugging purposes - never use in production!
+
 ## Develop
 
 To set up a local development build of **`LavaDome`**, clone this repo and run one of the following commands:
@@ -118,6 +160,8 @@ The design complexity of this project isn't high. However, satisfying the combin
 Implements the basic API layer that mediates the communication between the consumer and the protected isolated component. The API aspires to allow as much external manipulation of the isolated component as possible without providing actual DOM nodes from within it to anyone - not even the consumer of LavaDome - to maintain the highest security level possible.
 
 In addition, it takes the responsibility of implementing all necessary security hardening to make `ShadowDom` feature usage truly secure in contrast to its native nature of not being a security feature by default (see [Security](#Security)).
+
+> Remember: the core package is not to be used for production purposes!
 
 ### [JavaScript](./packages/javascript) / [React](./packages/react) / etc
 
