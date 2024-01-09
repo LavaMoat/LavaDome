@@ -33,7 +33,7 @@ We live in a world where we can **no longer trust the code in our own apps**, an
 
 Currently, this sensitive content is simply attached to the DOM once it is exported, making it **fully accessible to all entities** running in the same app. That is, sections of the code that shouldn't have access to the private key could **easily extract it in plaintext**, so long as the malicious code has access to the DOM.
 
-But rest assured. **We believe this is a [solvable problem 👇](#Solution).**
+But rest assured. **We believe this is a [solvable problem](#Solution) 👇**
 
 ## Usage
 
