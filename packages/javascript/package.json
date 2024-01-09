@@ -1,11 +1,11 @@
 {
     "name": "@lavamoat/lavadome-javascript",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "",
     "license": "MIT",
     "main": "src/index.mjs",
     "dependencies": {
-        "@lavamoat/lavadome-core": "^0.0.5"
+        "@lavamoat/lavadome-core": "^0.0.6"
     },
     "scripts": {
         "build-demo-watch": "while true; do npm run build-demo; sleep 1; done",
