@@ -1,35 +1,26 @@
 'use strict';
 
+import {OPTIONS, options} from './options.mjs';
 import {
-    WeakMap, Error,
+    Error, map, at,
     defineProperties,
     from, stringify,
-    attachShadow,
     createElement,
     appendChild,
     textContentSet,
-    map, at, get, set,
 } from './native.mjs';
 import {distraction, unselectable} from './element.mjs';
-import {OPTIONS, options} from './options.mjs';
-
-const shadows = new WeakMap();
+import {getShadow} from './shadow.mjs';
 
 export function LavaDome(host, opts) {
-    const {shadowRootOpts} = options(opts);
+    opts = options(opts);
     
     // make exported API tamper-proof
     defineProperties(this, {text: {value: text}});
 
-    // cache shadows for efficient reuse
-    let shadow = get(shadows, host);
-    if (!shadow) {
-        shadow = attachShadow(host, shadowRootOpts);
-        set(shadows, host, shadow);
-    }
-
     // child of the shadow, where the secret is set, must be unselectable
     const child = unselectable();
+    const shadow = getShadow(host, opts);
     appendChild(shadow, child);
 
     function text(text) {
@@ -48,8 +39,8 @@ export function LavaDome(host, opts) {
         // place each char of the secret in its own LavaDome protection instance
         map(from(text), char => {
             const span = createElement(document, 'span');
-            // disable warnings for internal LavaDome instances
-            opts[OPTIONS.disableWarnings] = true;
+            // mark as internal LavaDome instance
+            opts[OPTIONS.isInnerInstance] = true;
             new LavaDome(span, opts).text(char);
             appendChild(child, span);
         });

@@ -7,7 +7,7 @@ const {
     Error, JSON,
 } = window;
 const {
-    defineProperties,
+    defineProperties, assign,
     getOwnPropertyDescriptor,
     entries, create, hasOwn,
 } = Object;
@@ -40,7 +40,7 @@ export {
     parseInt, WeakMap,
     Error, JSON,
     // Object
-    defineProperties,
+    defineProperties, assign,
     getOwnPropertyDescriptor,
     entries, create, hasOwn,
     // Array

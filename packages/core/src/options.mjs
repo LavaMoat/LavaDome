@@ -1,8 +1,10 @@
-import {create, hasOwn} from './native.mjs';
+'use strict';
+
+import {create, hasOwn, assign} from './native.mjs';
 
 export const OPTIONS = {
     // internal
-    disableWarnings: Symbol('disableWarnings'),
+    isInnerInstance: Symbol('isInnerInstance'),
     // external
     unsafeOpenModeShadow: 'unsafeOpenModeShadow',
 };
@@ -18,21 +20,14 @@ const getter = (opts) => function get(prop, type, def) {
     return val;
 };
 
-export function options(opts = create(null)) {
+export function options(opts = {}) {
     const {
         unsafeOpenModeShadow,
-        disableWarnings,
+        isInnerInstance,
     } = OPTIONS;
-    const get = getter(opts);
+    const get = getter(assign(create(null), opts));
     const options = create(null);
-    options.disableWarnings = get(disableWarnings, 'boolean', false);
+    options.isInnerInstance = get(isInnerInstance, 'boolean', false);
     options.unsafeOpenModeShadow = get(unsafeOpenModeShadow, 'boolean', false);
-    if (!options.disableWarnings && options.unsafeOpenModeShadow) {
-        console.warn('LavaDome:',
-            `Initiated with "${unsafeOpenModeShadow}" set to true.`,
-            'This leaves LavaDome fully vulnerable, ONLY USE FOR TESTING!',
-        );
-    }
-    options.shadowRootOpts = {mode: !!options.unsafeOpenModeShadow ? 'open' : 'closed'};
     return options;
 }
