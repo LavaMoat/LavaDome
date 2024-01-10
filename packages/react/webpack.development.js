@@ -4,7 +4,7 @@ require('webpack-dev-server')
 const path = require('path')
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const baseConfig = require('./webpack.config')
+const baseConfig = require('../../webpack.config');
 baseConfig.entry['demo'] = path.resolve(__dirname, 'demo/index.js');
 
 const devtool = process.env.DEVTOOL || 'eval-cheap-module-source-map'
