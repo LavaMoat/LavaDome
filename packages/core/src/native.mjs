@@ -5,7 +5,7 @@ const {
     Function, Math,
     parseInt, WeakMap,
     Error, JSON,
-} = window;
+} = globalThis;
 const {
     defineProperties, assign,
     getOwnPropertyDescriptor,
@@ -17,21 +17,21 @@ const { stringify } = JSON;
 
 // native generation util
 const n = (obj, prop, accessor) =>
-    Function.prototype.call.bind(getOwnPropertyDescriptor(obj, prop)[accessor]);
+    obj && Function.prototype.call.bind(getOwnPropertyDescriptor(obj, prop)[accessor]);
 
-export const attachShadow = n(Element.prototype, 'attachShadow', 'value');
-export const createElement = n(Document.prototype, 'createElement', 'value');
-export const appendChild = n(Node.prototype, 'appendChild', 'value');
-export const textContentSet = n(Node.prototype, 'textContent', 'set');
-export const setAttribute = n(Element.prototype, 'setAttribute', 'value');
-export const toUpperCase = n(String.prototype, 'toUpperCase', 'value');
-export const map = n(Array.prototype, 'map', 'value');
-export const join = n(Array.prototype, 'join', 'value');
-export const keys = n(Array.prototype, 'keys', 'value');
-export const at = n(Array.prototype, 'at', 'value');
-export const get = n(WeakMap.prototype, 'get', 'value');
-export const set = n(WeakMap.prototype, 'set', 'value');
-export const toFixed = n(Number.prototype, 'toFixed', 'value')
+export const attachShadow = n(globalThis?.Element?.prototype, 'attachShadow', 'value');
+export const createElement = n(globalThis?.Document?.prototype, 'createElement', 'value');
+export const appendChild = n(globalThis?.Node?.prototype, 'appendChild', 'value');
+export const textContentSet = n(globalThis?.Node?.prototype, 'textContent', 'set');
+export const setAttribute = n(globalThis?.Element?.prototype, 'setAttribute', 'value');
+export const toUpperCase = n(globalThis?.String?.prototype, 'toUpperCase', 'value');
+export const map = n(globalThis?.Array?.prototype, 'map', 'value');
+export const join = n(globalThis?.Array?.prototype, 'join', 'value');
+export const keys = n(globalThis?.Array?.prototype, 'keys', 'value');
+export const at = n(globalThis?.Array?.prototype, 'at', 'value');
+export const get = n(globalThis?.WeakMap?.prototype, 'get', 'value');
+export const set = n(globalThis?.WeakMap?.prototype, 'set', 'value');
+export const toFixed = n(globalThis?.Number?.prototype, 'toFixed', 'value')
 
 export {
     // window
