@@ -6,6 +6,13 @@
   "workspaces": [
     "packages/*"
   ],
+  "scripts": {
+    "build-core": "cd packages/core/ && npm run build && cd ..",
+    "build-javascript": "cd packages/javascript/ && npm run build && cd ..",
+    "build-react": "cd packages/react/ && npm run build && cd ..",
+    "build": "npm run build-core && npm run build-javascript && npm run build-react",
+    "publish": "npm publish --access=public -ws"
+  },
   "devDependencies": {
     "esbuild": "0.19.8",
     "@wdio/cli": "^8.27.0",
