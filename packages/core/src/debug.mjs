@@ -1,6 +1,8 @@
 import {OPTIONS} from './options.mjs';
 import {from, map} from './native.mjs';
-import {distraction} from './element.mjs';
+import {chars} from './char.mjs';
+
+const {all} = chars;
 
 // Attempt to reconstruct LavaDome instance secret given its original root - an UNSAFE
 // method only expected to work when 'unsafeOpenModeShadow' debug-only option is enabled
@@ -37,7 +39,7 @@ function stripDistractionFromText(text) {
     );
 
     return text
-        .split(distraction().innerText).join('')
+        .split(all).join('')
         .split('\n').join('')
         .split('\r').join('')
         .split('\t').join('');

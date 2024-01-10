@@ -9,14 +9,14 @@ import {
     setAttribute,
     textContentSet,
     toFixed,
-    toUpperCase,
 } from './native.mjs';
+import {chars} from './char.mjs';
 
-const letters = 'abcdefghijklmnopqrstuvwxyz';
-const digits = '0123456789';
-const symbols = '!@#$%^&*()?.;:"\'[]{}+=-_/';
-const alphanumeric = letters + digits;
-const all = letters + toUpperCase(letters) + digits + symbols;
+const {
+    letters,
+    alphanumeric,
+    all,
+} = chars;
 
 const randChar = (f, n) => f[parseInt(toFixed(random() * n))];
 const rand = len => randChar(letters, 26) +
