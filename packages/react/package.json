@@ -3,14 +3,15 @@
     "version": "0.0.7",
     "description": "",
     "license": "MIT",
-    "main": "./build/main.js",
+    "module": "src/index.mjs",
+    "main": "build/main.js",
     "scripts": {
         "test": "npm run dev & (npm run test-chrome && npm run test-firefox && npm run test-safari)",
         "test-chrome": "../../node_modules/.bin/wdio run chrome.wdio.conf.js",
         "test-safari": "../../node_modules/.bin/wdio run safari.wdio.conf.js",
         "test-firefox": "../../node_modules/.bin/wdio run firefox.wdio.conf.js",
-        "build": "NODE_ENV=production webpack --config ./webpack.production.js",
-        "dev": "NODE_ENV=development webpack serve --config ./webpack.development.js"
+        "build": "NODE_ENV=production LD_PKG=react webpack --config ../../webpack.production.js",
+        "dev": "NODE_ENV=development LD_PKG=react webpack serve --config webpack.development.js"
     },
     "devDependencies": {
         "@babel/core": "^7.23.6",

@@ -4,7 +4,9 @@
     "description": "",
     "license": "MIT",
     "scripts": {
-        "demo": "serve . -l 3000"
+        "demo": "serve . -l 3000",
+        "build": "NODE_ENV=production LD_PKG=core webpack --config ../../webpack.production.js"
     },
-    "main": "src/index.mjs"
+    "module": "src/index.mjs",
+    "main": "build/main.js"
 }

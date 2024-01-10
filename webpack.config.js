@@ -1,15 +1,15 @@
-const path = require('path')
+const path = require('path');
+const fs = require('fs');
 
-const mode = process.env.NODE_ENV || 'development'
+const mode = process.env.NODE_ENV || 'development';
+const dir = [__dirname, 'packages', process.env.LD_PKG];
 
 const baseConfig = {
   // experiments: {outputModule: true},
   mode,
-  entry: {
-    main: path.resolve(__dirname, 'src/index.jsx'),
-  },
+  entry: {},
   output: {
-    path: path.resolve(__dirname, 'build'),
+    path: path.resolve(...dir, 'build'),
     filename: '[name].js',
     clean: true,
   },
@@ -42,6 +42,12 @@ const baseConfig = {
   optimization: {
     usedExports: false,
   },
+};
+
+if (fs.existsSync(path.join(...dir, 'src/index.mjs'))) {
+  baseConfig.entry.main = path.resolve(...dir, 'src/index.mjs');
+} else {
+  baseConfig.entry.main = path.resolve(...dir, 'src/index');
 }
 
 module.exports = baseConfig
