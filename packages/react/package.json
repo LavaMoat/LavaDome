@@ -1,6 +1,6 @@
 {
     "name": "@lavamoat/lavadome-react",
-    "version": "0.0.8",
+    "version": "0.0.9",
     "description": "",
     "license": "MIT",
     "module": "src/index.mjs",
@@ -31,7 +31,7 @@
         "webpack-dev-server": "4.15.1"
     },
     "dependencies": {
-        "@lavamoat/lavadome-core": "^0.0.8"
+        "@lavamoat/lavadome-core": "^0.0.9"
     },
     "peerDependencies": {
         "react": "^16.12.0",
