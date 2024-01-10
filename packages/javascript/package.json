@@ -1,12 +1,12 @@
 {
     "name": "@lavamoat/lavadome-javascript",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "description": "",
     "license": "MIT",
     "module": "src/index.mjs",
     "main": "build/main.js",
     "dependencies": {
-        "@lavamoat/lavadome-core": "^0.0.7"
+        "@lavamoat/lavadome-core": "^0.0.8"
     },
     "scripts": {
         "build": "NODE_ENV=production LD_PKG=javascript webpack --config ../../webpack.production.js",
