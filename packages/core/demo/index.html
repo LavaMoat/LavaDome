@@ -25,7 +25,7 @@
                     console.log(
                         'DEMO(LavaDomeDebug):',
                         `Since 'unsafeOpenModeShadow' is ${unsafeOpenModeShadow ? 'ENABLED' : 'DISABLED'}, here's the secret:`,
-                        `'${LavaDomeDebug.getTextByRoot(root)}'`,
+                        `'${LavaDomeDebug.stripDistractionFromText(LavaDomeDebug.getTextByRoot(root))}'`,
                     );
                 }
             }());

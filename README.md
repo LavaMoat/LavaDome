@@ -82,26 +82,46 @@ function Secret({ text }) {
 
 ### Testing
 
-To integrate `LavaDome` into your testing environment too, you can unsafely set `@unsafeOpenModeShadow` to `true` to make the shadow `LavaDome` uses `{mode:open}`.
+Integrating `LavaDome` could be tricky in context of testing it, because since `LavaDome` does a good job in hiding the secret, it hides it pretty well from your tests too!
 
-Once you did that, you'd be able to import `@lavamoat/lavadome-core`'s `LavaDomeDebug` API:
+To successfully integrate `LavaDome` into your testing environment, you might need some help from `LavaDomeDebug` which is exported by `@lavamoat/lavadome-core`:
 
 ```javascript
+// IMPORT/USE FOR TESTING/DEBUGGING PURPOSES ONLY - NEVER IN PRODUCTION!
 import { LavaDomeDebug } from '@lavamoat/lavadome-core';
 ```
 
-And then use its debugging util functions for your needs:
+Here are some of the debugging util methods `LavaDomeDebug` exports that can assist you in testing `LavaDome` based components:
+
+#### `getTextByRoot()`
+
+Given a `LavaDome` attached root, `getTextByRoot()` will recursively extract and reconstruct the inner secret. In order to allow that, the `LavaDome` instance must be initiated originally with the UNSAFE option `@unsafeOpenModeShadow`, which makes `LavaDome`'s inner shadows accessible from outside.
+
+Naturally, this is UNSAFE and leaves `LavaDome` fully vulnerable, but makes sense to use for testing/debugging purposes only - makes sure to never enable this option in production!
 
 ```javascript
 new LavaDomeJavaScript(root, {
-    unsafeOpenModeShadow: true,
+    unsafeOpenModeShadow: isThisTestingEnv, // boolean
 }).text('123456');
 LavaDomeDebug.getTextByRoot(root) === '123456'; // true
 ```
 
-This works because `@unsafeOpenModeShadow=true` sets shadows to be `{mode:open}` instead of `{mode:closed}` which makes their content accessible from outside, which effectively also removes the whole purpose `LavaDome` comes to serve, and therefore:
+#### `stripDistractionFromText()`
 
-> Remember: `@unsafeOpenModeShadow` option is UNSAFE to use, and should be enabled only to serve testing/debugging purposes - **never use in production!**
+When using web drivers for testing and instructing those to extract the inner text of a `LavaDome` instance root, they will return a string containing both the secret and `LavaDome`s distraction text.
+
+The distraction text is important for security (see [Security(side-channeling)](#5-side-channeling)), but makes web driver extract characters that aren't really part of the secret.
+
+To solve that, given the text obtained by the web driver, `stripDistractionFromText()` will strip the distraction text from it, leaving only the exact string your tests expect to find.
+
+> Don't worry about the distraction text, it will never be visible/intractable to the user in your app, but it must exist for security reasons 
+
+```javascript
+new LavaDomeJavaScript(root).text('123456');
+const element = await driver.findElement('#ROOT'); // driver
+const text = await element.getText(); // driver
+LavaDomeDebug.stripDistractionFromText(text) === '123456'; // true
+```
 
 ## Develop
 
