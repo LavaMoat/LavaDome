@@ -8,6 +8,8 @@
 
 ## [**Demo**](https://lavamoat.github.io/LavaDome/packages/core/demo/)
 
+_Take a crack at `LavaDome` - visit the [demo app](https://lavamoat.github.io/LavaDome/packages/core/demo/), open the console, and do whatever in your power to steal the secret from within the LavaDome instance ([report](https://github.com/LavaMoat/LavaDome/issues/new) your success)_
+
 <details>
 <summary><strong>Preview</strong><i> (click to expand) </i></summary>
 <br>
