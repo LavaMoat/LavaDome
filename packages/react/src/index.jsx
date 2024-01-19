@@ -1,19 +1,26 @@
 import React, { useEffect, useRef } from 'react'
 import { LavaDome as LavaDomeCore } from "@lavamoat/lavadome-core"
 
-export const LavaDome = ({ text, unsafeOpenModeShadow }) => {
+const STORE = new WeakMap();
+export const envelope = (secret) => {
+    const en = Object.create(null);
+    STORE.set(en, secret);
+    return en;
+};
+
+export const LavaDome = ({ envelope, unsafeOpenModeShadow }) => {
     const hostRef = useRef(null);
     return (
         <span ref={hostRef}>
             <LavaDomeShadow
-                text={text} hostRef={hostRef}
+                envelope={envelope} hostRef={hostRef}
                 unsafeOpenModeShadow={unsafeOpenModeShadow}
             />
         </span>
     )
 };
 
-function LavaDomeShadow({ hostRef, text, unsafeOpenModeShadow }) {
+function LavaDomeShadow({ hostRef, envelope, unsafeOpenModeShadow }) {
     const lavadome = useRef(null);
 
     useEffect(() => {
@@ -24,8 +31,9 @@ function LavaDomeShadow({ hostRef, text, unsafeOpenModeShadow }) {
     }, [])
 
     useEffect(() => {
-        lavadome.current.text(text);
-    }, [text]);
+        const payload = STORE.get(envelope);
+        lavadome.current.text(payload);
+    }, [envelope]);
 
     return <></>
 }
