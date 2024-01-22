@@ -16,7 +16,7 @@ export function LavaDome(host, opts) {
     opts = options(opts);
     
     // make exported API tamper-proof
-    defineProperties(this, {text: {value: text}});
+    defineProperties(this, {text: {value: text, configurable: false, writable: false }});
 
     // child of the shadow, where the secret is set, must be unselectable
     const child = unselectable();
