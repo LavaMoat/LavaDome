@@ -1,21 +1,27 @@
 {
-    "name": "@lavamoat/lavadome-javascript",
-    "version": "0.0.10",
-    "description": "",
-    "license": "MIT",
-    "module": "src/index.mjs",
-    "main": "build/main.js",
-    "dependencies": {
-        "@lavamoat/lavadome-core": "^0.0.10"
-    },
-    "scripts": {
-        "build": "NODE_ENV=production LD_PKG=javascript webpack --config ../../webpack.production.js",
-        "build-demo-watch": "while true; do npm run build-demo; sleep 1; done",
-        "build-demo": "../../node_modules/.bin/esbuild demo/index.js --bundle --outfile=demo/build/index.js --allow-overwrite --target=es2020",
-        "demo": "npm run build-demo && serve ./demo -l 3000",
-        "test": "npm run demo & npm run test-chrome && npm run test-firefox && npm run test-safari",
-        "test-chrome": "../../node_modules/.bin/wdio run chrome.wdio.conf.js",
-        "test-safari": "../../node_modules/.bin/wdio run safari.wdio.conf.js",
-        "test-firefox": "../../node_modules/.bin/wdio run firefox.wdio.conf.js"
+  "name": "@lavamoat/lavadome-javascript",
+  "version": "0.0.10",
+  "description": "",
+  "license": "MIT",
+  "module": "src/index.mjs",
+  "main": "build/main.js",
+  "dependencies": {
+    "@lavamoat/lavadome-core": "^0.0.10",
+    "@lavamoat/preinstall-always-fail": "^2.0.0"
+  },
+  "scripts": {
+    "build": "NODE_ENV=production LD_PKG=javascript webpack --config ../../webpack.production.js",
+    "build-demo-watch": "while true; do npm run build-demo; sleep 1; done",
+    "build-demo": "../../node_modules/.bin/esbuild demo/index.js --bundle --outfile=demo/build/index.js --allow-overwrite --target=es2020",
+    "demo": "npm run build-demo && serve ./demo -l 3000",
+    "test": "npm run demo & npm run test-chrome && npm run test-firefox && npm run test-safari",
+    "test-chrome": "../../node_modules/.bin/wdio run chrome.wdio.conf.js",
+    "test-safari": "../../node_modules/.bin/wdio run safari.wdio.conf.js",
+    "test-firefox": "../../node_modules/.bin/wdio run firefox.wdio.conf.js"
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "@lavamoat/preinstall-always-fail": false
     }
+  }
 }
