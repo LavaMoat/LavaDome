@@ -1,12 +1,12 @@
 {
-    "name": "@lavamoat/lavadome-core",
-    "version": "0.0.10",
-    "description": "",
-    "license": "MIT",
-    "scripts": {
-        "demo": "serve . -l 3000",
-        "build": "NODE_ENV=production LD_PKG=core webpack --config ../../webpack.production.js"
-    },
-    "module": "src/index.mjs",
-    "main": "build/main.js"
+  "name": "@lavamoat/lavadome-core",
+  "version": "0.0.10",
+  "description": "",
+  "license": "MIT",
+  "scripts": {
+    "demo": "serve . -l 3000",
+    "build": "NODE_ENV=production LD_PKG=core webpack --config ../../webpack.production.js"
+  },
+  "module": "src/index.mjs",
+  "main": "build/main.js"
 }
