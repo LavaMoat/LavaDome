@@ -11,15 +11,17 @@
     "build-javascript": "cd packages/javascript/ && npm run build && cd ..",
     "build-react": "cd packages/react/ && npm run build && cd ..",
     "build": "npm run build-core && npm run build-javascript && npm run build-react",
-    "publish": "npm publish --access=public -ws"
+    "publish": "npm publish --access=public -ws",
+    "setup": "npm install && npm run allow-scripts"
   },
   "devDependencies": {
-    "esbuild": "0.19.8",
+    "@lavamoat/allow-scripts": "^3.0.1",
     "@wdio/cli": "^8.27.0",
     "@wdio/local-runner": "^8.27.0",
     "@wdio/mocha-framework": "^8.27.0",
     "@wdio/spec-reporter": "^8.27.0",
     "chromedriver": "119.0.1",
+    "esbuild": "0.19.8",
     "geckodriver": "^4.3.0",
     "wdio-chromedriver-service": "8.1.1",
     "wdio-geckodriver-service": "^5.0.2",
@@ -35,5 +37,17 @@
   "bugs": {
     "url": "https://github.com/lavamoat/LavaDome/issues"
   },
-  "homepage": "https://github.com/lavamoat/LavaDome#readme"
+  "homepage": "https://github.com/lavamoat/LavaDome#readme",
+  "dependencies": {
+    "@lavamoat/preinstall-always-fail": "^2.0.0"
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "@lavamoat/preinstall-always-fail": false,
+      "@wdio/cli>@wdio/utils>edgedriver": false,
+      "chromedriver": false,
+      "esbuild": false,
+      "geckodriver": false
+    }
+  }
 }

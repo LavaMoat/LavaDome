@@ -6,7 +6,8 @@
   "module": "src/index.mjs",
   "main": "build/main.js",
   "dependencies": {
-    "@lavamoat/lavadome-core": "^0.0.10"
+    "@lavamoat/lavadome-core": "^0.0.10",
+    "@lavamoat/preinstall-always-fail": "^2.0.0"
   },
   "scripts": {
     "build": "NODE_ENV=production LD_PKG=javascript webpack --config ../../webpack.production.js",
@@ -17,5 +18,10 @@
     "test-chrome": "../../node_modules/.bin/wdio run chrome.wdio.conf.js",
     "test-safari": "../../node_modules/.bin/wdio run safari.wdio.conf.js",
     "test-firefox": "../../node_modules/.bin/wdio run firefox.wdio.conf.js"
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "@lavamoat/preinstall-always-fail": false
+    }
   }
 }

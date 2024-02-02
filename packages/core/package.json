@@ -8,5 +8,13 @@
     "build": "NODE_ENV=production LD_PKG=core webpack --config ../../webpack.production.js"
   },
   "module": "src/index.mjs",
-  "main": "build/main.js"
+  "main": "build/main.js",
+  "dependencies": {
+    "@lavamoat/preinstall-always-fail": "^2.0.0"
+  },
+  "lavamoat": {
+    "allowScripts": {
+      "@lavamoat/preinstall-always-fail": false
+    }
+  }
 }
