@@ -11,7 +11,8 @@
     "build-javascript": "cd packages/javascript/ && npm run build && cd ..",
     "build-react": "cd packages/react/ && npm run build && cd ..",
     "build": "npm run build-core && npm run build-javascript && npm run build-react",
-    "publish": "npm publish --access=public -ws"
+    "publish": "npm publish --access=public -ws",
+    "setup": "npm install && npm run allow-scripts"
   },
   "devDependencies": {
     "@lavamoat/allow-scripts": "^3.0.1",
