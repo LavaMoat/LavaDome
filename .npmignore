@@ -6,3 +6,4 @@ dist
 logs
 yarn-error.log
 lavadome.js
+.swcrc

@@ -5,6 +5,10 @@
   "license": "MIT",
   "module": "src/index.mjs",
   "main": "build/main.js",
+  "files": [
+    "src",
+    "build"
+  ],
   "dependencies": {
     "@lavamoat/lavadome-core": "^0.0.10",
     "@lavamoat/preinstall-always-fail": "^2.0.0"
