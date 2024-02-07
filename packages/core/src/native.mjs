@@ -31,6 +31,7 @@ export const keys = n(globalThis?.Array?.prototype, 'keys', 'value');
 export const at = n(globalThis?.Array?.prototype, 'at', 'value');
 export const get = n(globalThis?.WeakMap?.prototype, 'get', 'value');
 export const set = n(globalThis?.WeakMap?.prototype, 'set', 'value');
+export const has = n(globalThis?.WeakMap?.prototype, 'has', 'value');
 export const toFixed = n(globalThis?.Number?.prototype, 'toFixed', 'value')
 
 export {
