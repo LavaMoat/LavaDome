@@ -7,6 +7,10 @@
     "demo": "serve . -l 3000",
     "build": "NODE_ENV=production LD_PKG=core webpack --config ../../webpack.production.js"
   },
+  "files": [
+    "src",
+    "build"
+  ],
   "module": "src/index.mjs",
   "main": "build/main.js",
   "dependencies": {
