@@ -16,16 +16,9 @@
   },
   "devDependencies": {
     "@lavamoat/allow-scripts": "^3.0.1",
-    "@wdio/cli": "^8.27.0",
-    "@wdio/local-runner": "^8.27.0",
-    "@wdio/mocha-framework": "^8.27.0",
-    "@wdio/spec-reporter": "^8.27.0",
     "chromedriver": "119.0.1",
     "esbuild": "0.19.8",
-    "geckodriver": "^4.3.0",
-    "wdio-chromedriver-service": "8.1.1",
-    "wdio-geckodriver-service": "^5.0.2",
-    "wdio-safaridriver-service": "^2.1.1"
+    "geckodriver": "^4.3.0"
   },
   "repository": {
     "type": "git",
@@ -44,7 +37,6 @@
   "lavamoat": {
     "allowScripts": {
       "@lavamoat/preinstall-always-fail": false,
-      "@wdio/cli>@wdio/utils>edgedriver": false,
       "chromedriver": false,
       "esbuild": false,
       "geckodriver": false
