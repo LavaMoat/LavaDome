@@ -54,10 +54,10 @@ lavadome.text(secret);
 ### [React](./packages/react)
 
 ```javascript
-import { LavaDome as LavaDomeReact } from '@lavamoat/lavadome-react';
+import { LavaDome as LavaDomeReact, toLavaDomeToken } from '@lavamoat/lavadome-react';
 
 function Secret({ text }) {
-    return <LavaDomeReact text={text} />
+    return <LavaDomeReact text={toLavaDomeToken(text)} />
 }
 ```
 
@@ -75,7 +75,7 @@ new LavaDomeJavaScript(root, {
 // react
 function Secret({ text }) {
     return <LavaDomeReact
-        text={text}
+        text={toLavaDomeToken(text)}
         // boolean
         unsafeOpenModeShadow={false}
     />
@@ -153,7 +153,7 @@ The **`LavaDome`** project follows the following core principles:
 
 ### Secure
 
-Our top priority is providing air-tight security. We have wrapped the `ShadowDom` API with advanced security properties to make it safe for use when presenting sensitive info.
+Our top priority is providing airtight security. We have wrapped the `ShadowDom` API with advanced security properties to make it safe for use when presenting sensitive info.
 
 Visit [Security](#Security) to learn more about this effort.
 
@@ -292,7 +292,7 @@ The second technique of using `contenteditable` as an attribute isn't currently 
 
 #### 3. Selectability ([getSelection](https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection))
 
-The attack vectors above aren't so useful if `getSelection` is mitigated. By making the text contained in **`LavaDome`** non-selectable, we harden the security against possible injection as demonstrated above. This works well in Chromium but we are working out some issues with Firefox.
+The attack vectors above aren't so useful if `getSelection` is mitigated. By making the text contained in **`LavaDome`** non-selectable, we harden the security against possible injection as demonstrated above. This works well in Chromium, but we are working out some issues with Firefox.
 
 #### 4. Secret splitting
 
@@ -325,6 +325,16 @@ A secure solution requires defensive coding practices.
 - When using the framework versions of **`LavaDome`**, you should assume that these frameworks are not defensively written, and that the native APIs use are not safe from malicious interference. Be warned that the security of external code is outside of **`LavaDome`**'s control.
 
 Therefore, we recommend always integrating such security solutions with the [SES](https://github.com/endojs/endo/tree/master/packages/ses#ses) technology developed by [@agoric](https://github.com/agoric). This is a security practice followed at [LavaMoat](https://github.com/lavamoat/lavamoat) and [MetaMask](https://github.com/MetaMask/metamask-extension).
+
+#### 7. React internals processing leakage
+
+Another thing to worry about (specifically in context of React) is the fact that input provided to React components is being actively leaked by it to the global object, thus making it up for grabs for untrusted entities running in the app (which undermines `LavaDome`'s goal completely).
+
+To balance our intention to support React with how we can't trust it with our secret, `LavaDomeReact` package exports some minimal (yet safe) functionality to exchange the secret with a special token before passing it on to React, where the only entity that can exchange that token back to the secret is `LavaDome` itself.
+
+While powerful, this unfortunately requires React users to actively perform the exchange before passing the secret to `LavaDomeReact`.
+
+If anything other than a well known token is received by the user, a `LavaDome`-generated exception is thrown, to force developers to use `LavaDomeReact` safely. 
 
 ## Disclaimer
 
