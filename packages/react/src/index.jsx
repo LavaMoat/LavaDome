@@ -2,20 +2,19 @@ import React, { useEffect, useRef } from 'react'
 import { LavaDome as LavaDomeCore } from "@lavamoat/lavadome-core"
 import {WeakMap, get, set, has, Symbol} from "../../core/src/native.mjs"
 
-const wraps = new WeakMap();
+const lavadomes = new WeakMap();
 
-const unwrap = wrapped => get(wraps, wrapped);
-
-export const wrap = text => {
-    const wrapped = Symbol();
-    set(wraps, wrapped, text);
-    return wrapped;
+export const lavadome = text => {
+    const lavadome = Symbol();
+    set(lavadomes, lavadome, text);
+    return lavadome;
 }
 
 export const LavaDome = ({ text, unsafeOpenModeShadow }) => {
-    if (!has(wraps, text)) {
+    if (!has(lavadomes, text)) {
         throw new Error(
-            `LavaDome: first argument must be a LavaDome wrapped object (did you forget to call "wrap(secret)" before passing the secret?)`);
+            'LavaDome: first argument must be a LavaDome token ' +
+            '(replace "text={\'secret\'}" with "text={lavadome(\'secret\')}")');
     }
 
     const hostRef = useRef(null);
@@ -41,7 +40,7 @@ function LavaDomeShadow({ hostRef, text, unsafeOpenModeShadow }) {
     }, [])
 
     useEffect(() => {
-        lavadome.current.text(unwrap(text));
+        lavadome.current.text(get(lavadomes, text));
     }, [text]);
 
     return <></>
