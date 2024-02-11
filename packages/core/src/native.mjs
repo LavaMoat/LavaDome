@@ -4,7 +4,7 @@ const {
     Object, Array,
     Function, Math,
     parseInt, WeakMap,
-    Error, JSON,
+    Error, JSON, Symbol,
 } = globalThis;
 const {
     defineProperties, assign,
@@ -39,7 +39,7 @@ export {
     Object, Array,
     Function, Math,
     parseInt, WeakMap,
-    Error, JSON,
+    Error, JSON, Symbol,
     // Object
     defineProperties, assign,
     getOwnPropertyDescriptor,
