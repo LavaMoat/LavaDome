@@ -1,5 +1,5 @@
 import React from 'react';
-import { LavaDome as LavaDomeReact, lavadome } from '../src/index';
+import { LavaDome as LavaDomeReact, toLavaDomeToken } from '../src/index';
 
 const unsafeOpenModeShadow = location.href.includes('unsafeOpenModeShadow');
 
@@ -17,7 +17,7 @@ export default function App() {
                 <p id="PRIVATE">
                     <LavaDomeReact
                         unsafeOpenModeShadow={unsafeOpenModeShadow}
-                        text={lavadome('SECRET_CONTENT_ONLY_ACCESSIBLE_TO_LAVADOME')}
+                        text={toLavaDomeToken('SECRET_CONTENT_ONLY_ACCESSIBLE_TO_LAVADOME')}
                     />
                 </p>
             </div>
