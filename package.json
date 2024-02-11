@@ -16,9 +16,7 @@
   },
   "devDependencies": {
     "@lavamoat/allow-scripts": "^3.0.1",
-    "chromedriver": "119.0.1",
-    "esbuild": "0.19.8",
-    "geckodriver": "^4.3.0"
+    "esbuild": "0.19.8"
   },
   "repository": {
     "type": "git",
@@ -37,9 +35,7 @@
   "lavamoat": {
     "allowScripts": {
       "@lavamoat/preinstall-always-fail": false,
-      "chromedriver": false,
-      "esbuild": false,
-      "geckodriver": false
+      "esbuild": false
     }
   }
 }
