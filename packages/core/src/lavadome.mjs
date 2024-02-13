@@ -26,7 +26,7 @@ export function LavaDome(host, opts) {
     function text(text) {
         if (typeof text !== 'string') {
             throw new Error(
-                `LavaDome: first argument must be a string, instead got ${stringify(text)}`);
+                `LavaDomeCore: first argument must be a string, instead got ${stringify(text)}`);
         }
 
         // check if text is a single char and if so, either is part of a longer secret
