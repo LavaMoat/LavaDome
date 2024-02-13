@@ -19,7 +19,7 @@ export const LavaDome = ({ text, unsafeOpenModeShadow }) => {
 
 function LavaDomeShadow({ host, token, unsafeOpenModeShadow }) {
     // exchange token for sensitive text before check
-    const text = tokenToText(token);
+    const text = tokenToText(token, unsafeOpenModeShadow);
     const lavadome = useRef(null);
 
     // generate a lavadome instance reference with a teardown

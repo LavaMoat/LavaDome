@@ -14,7 +14,7 @@ const {
 const { from } = Array;
 const {random } = Math;
 const { stringify } = JSON;
-const randomUUID = crypto.randomUUID.bind(crypto);
+const randomUUID = crypto?.randomUUID?.bind(crypto);
 
 // native generation util
 const n = (obj, prop, accessor) =>
