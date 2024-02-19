@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { LavaDome as LavaDomeCore } from "@lavamoat/lavadome-core"
-import { tokenToText } from "./token.mjs";
+import {tokenToDep, tokenToText} from "./token.mjs";
 
 export const LavaDome = ({ text, unsafeOpenModeShadow }) => {
     // variable @text is named that way only for visibility - in reality it's a lavadome token
@@ -18,19 +18,23 @@ export const LavaDome = ({ text, unsafeOpenModeShadow }) => {
 };
 
 function LavaDomeShadow({ host, token, unsafeOpenModeShadow }) {
+    let lavadome;
+
     // exchange token for sensitive text before check
     const text = tokenToText(token, unsafeOpenModeShadow);
-    const lavadome = useRef(null);
 
     // generate a lavadome instance reference with a teardown
     useEffect(() => {
         const opts = { unsafeOpenModeShadow };
-        lavadome.current = new LavaDomeCore(host.current, opts);
-        return () => lavadome.current = null;
+        lavadome = new LavaDomeCore(host.current, opts);
+        return () => lavadome = null;
     }, []);
 
+    // use a unique and useless representation of the token as the useEffect dep
+    const dep = tokenToDep(token);
+
     // update lavadome secret text (given that the token is updated too)
-    useEffect(() => lavadome.current.text(text), [token]);
+    useEffect(() => lavadome.text(text), [dep]);
 
     return <></>;
 }
