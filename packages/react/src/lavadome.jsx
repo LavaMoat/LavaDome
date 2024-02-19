@@ -18,23 +18,14 @@ export const LavaDome = ({ text, unsafeOpenModeShadow }) => {
 };
 
 function LavaDomeShadow({ host, token, unsafeOpenModeShadow }) {
-    let lavadome;
-
-    // exchange token for sensitive text before check
-    const text = tokenToText(token, unsafeOpenModeShadow);
-
-    // generate a lavadome instance reference with a teardown
-    useEffect(() => {
-        const opts = { unsafeOpenModeShadow };
-        lavadome = new LavaDomeCore(host.current, opts);
-        return () => lavadome = null;
-    }, []);
-
-    // use a unique and useless representation of the token as the useEffect dep
-    const dep = tokenToDep(token);
+    const
+        // exchange token for sensitive text before check
+        text = tokenToText(token, unsafeOpenModeShadow),
+        // use a unique and useless representation of the token as the useEffect dep
+        dep = tokenToDep(token);
 
     // update lavadome secret text (given that the token is updated too)
-    useEffect(() => lavadome.text(text), [dep]);
+    useEffect(() => new LavaDomeCore(host.current, { unsafeOpenModeShadow }).text(text), [dep]);
 
     return <></>;
 }

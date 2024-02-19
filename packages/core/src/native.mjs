@@ -20,6 +20,7 @@ const randomUUID = crypto?.randomUUID?.bind(crypto);
 const n = (obj, prop, accessor) =>
     obj && Function.prototype.call.bind(getOwnPropertyDescriptor(obj, prop)[accessor]);
 
+export const replaceChildren = n(globalThis?.DocumentFragment?.prototype, 'replaceChildren', 'value');
 export const attachShadow = n(globalThis?.Element?.prototype, 'attachShadow', 'value');
 export const createElement = n(globalThis?.Document?.prototype, 'createElement', 'value');
 export const appendChild = n(globalThis?.Node?.prototype, 'appendChild', 'value');
