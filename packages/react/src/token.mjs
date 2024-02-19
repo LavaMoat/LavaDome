@@ -1,17 +1,27 @@
 import {create, hasOwn, randomUUID, stringify} from "@lavamoat/lavadome-core/src/native.mjs";
 import {OPTIONS} from "@lavamoat/lavadome-core/src/options.mjs";
 
-const tokenToTextMap = create(null), textToTokenMap = create(null);
+const tokenToTextMap = create(null), textToTokenMap = create(null), tokenToDepMap = create(null);
 
-const rand = () => randomUUID ? randomUUID() :
+const isRandomSafe = !!randomUUID;
+const rand = () => isRandomSafe ? randomUUID() :
     // unsafe weak random generation - only meant for testing mode!
     // (because "randomUUID" might not appear in testing envs such as node)
     (Math.random() + 1).toString(36).substring(7);
 
+// we want to use the token as a useEffect dep, but we don't want to leak it to React
+// map each token with a unique dep-id that is useless and irreversible if obtained
+export function tokenToDep(token) {
+    if (!hasOwn(tokenToDepMap, token)) {
+        tokenToDepMap[token] = rand();
+    }
+    return tokenToDepMap[token];
+}
+
 // map given token back to the secret text, but do so safely by making
 // sure input is safe to access and use, as it comes from outside
 export function tokenToText(token, unsafeOpenModeShadow) {
-    if (!randomUUID) {
+    if (!isRandomSafe) {
         if (unsafeOpenModeShadow) {
             console.warn('LavaDomeReact:',
                 `It seems that some API required for LavaDome to perform safely is missing ("crypto.randomUUID").`,
