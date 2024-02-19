@@ -7,6 +7,7 @@ import {
     from, stringify,
     createElement,
     appendChild,
+    replaceChildren,
     textContentSet,
 } from './native.mjs';
 import {distraction, unselectable} from './element.mjs';
@@ -18,9 +19,12 @@ export function LavaDome(host, opts) {
     // make exported API tamper-proof
     defineProperties(this, {text: {value: text}});
 
+    // get/create shadow for host (empty shadow content if there's any already)
+    const shadow = getShadow(host, opts);
+    replaceChildren(shadow);
+
     // child of the shadow, where the secret is set, must be unselectable
     const child = unselectable();
-    const shadow = getShadow(host, opts);
     appendChild(shadow, child);
 
     function text(text) {

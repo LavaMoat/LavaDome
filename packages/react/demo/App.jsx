@@ -22,7 +22,7 @@ export default function App() {
                 <p id="PRIVATE">
                     <LavaDomeReact
                         unsafeOpenModeShadow={unsafeOpenModeShadow}
-                        text={toLavaDomeToken('SECRET_CONTENT_ONLY_ACCESSIBLE_TO_LAVADOME')}
+                        text={toLavaDomeToken(`SECRET_CONTENT_ONLY_ACCESSIBLE_TO_LAVADOME: "${count}"`)}
                     />
                 </p>
             </div>
