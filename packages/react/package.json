@@ -1,6 +1,6 @@
 {
   "name": "@lavamoat/lavadome-react",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "",
   "license": "MIT",
   "module": "src/index.mjs",
@@ -34,7 +34,7 @@
     "react-dom": "^16.12.0"
   },
   "dependencies": {
-    "@lavamoat/lavadome-core": "^0.0.15",
+    "@lavamoat/lavadome-core": "^0.0.16",
     "@lavamoat/preinstall-always-fail": "^2.0.0"
   },
   "peerDependencies": {
