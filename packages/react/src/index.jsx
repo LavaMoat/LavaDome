@@ -1,7 +1,4 @@
 'use strict';
 
-import {LavaDome} from "./lavadome";
-export {LavaDome};
-
-import {textToToken as toLavaDomeToken} from "./token.mjs";
-export {toLavaDomeToken};
+import {LavaDome, textToToken} from "./lavadome";
+export {LavaDome, textToToken as toLavaDomeToken};

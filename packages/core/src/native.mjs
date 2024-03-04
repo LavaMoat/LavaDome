@@ -4,7 +4,7 @@ const {
     Object, Array,
     Function, Math,
     parseInt, WeakMap,
-    Error, JSON, crypto,
+    Error, JSON,
 } = globalThis;
 const {
     defineProperties, assign,
@@ -14,7 +14,6 @@ const {
 const { from } = Array;
 const {random } = Math;
 const { stringify } = JSON;
-const randomUUID = crypto?.randomUUID?.bind(crypto);
 
 // native generation util
 const n = (obj, prop, accessor) =>
@@ -40,7 +39,7 @@ export {
     Object, Array,
     Function, Math,
     parseInt, WeakMap,
-    Error, JSON, crypto,
+    Error, JSON,
     // Object
     defineProperties, assign,
     getOwnPropertyDescriptor,
@@ -51,6 +50,4 @@ export {
     random,
     // JSON
     stringify,
-    // crypto
-    randomUUID,
 }
