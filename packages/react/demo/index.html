@@ -8,6 +8,34 @@
         }
     </style>
 </head>
+<script>
+    top.start = function(root) {
+        root.innerHTML = `
+            <div>
+                Currently, the LavaDomeReact demo only works locally by:
+                <li> cloning the
+                <a href="https://github.com/lavamoat/LavaDome">LavaDome repo</a>
+                </li>
+                <li>
+                setting up the project for development
+                </li>
+                and then:
+                <li>
+                running <code>npm run dev</code>
+                in the <code>react</code> package
+                </li>
+                <li>
+                and visiting <code>http://localhost:3000/</code>
+                </li>
+                But if you want to play with the core functionality of LavaDome without locally installing it,
+                you can easily do so by:
+                <li>
+                visiting the <a href="https://lavamoat.github.io/LavaDome/packages/core/demo/">online demo site</a>
+</li>
+            </div>
+        `;
+    }
+</script>
 <body style="max-width: 700px; background-color: #FDDACD " onload="start(PRIVATE)">
 <div id="content" style="padding: 10px">
     <h1><a href="https://github.com/lavamoat/LavaDome#react">LavaDome (React)</a> 🌋</h1>
