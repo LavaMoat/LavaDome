@@ -3,18 +3,21 @@ import { LavaDome as LavaDomeReact, toLavaDomeToken } from '../src/index';
 
 const unsafeOpenModeShadow = location.href.includes('unsafeOpenModeShadow');
 
+const blobURL = URL.createObjectURL(new Blob());
+const secret = blobURL.split('/')[3].split('-').join('');
+URL.revokeObjectURL(blobURL);
+
 export default function App() {
     const [count, setCount] = useState(0);
 
     console.info('render marked', count);
 
     return (
-        <div onClick={() => setCount(count+1)}
-            style={{ borderStyle: 'solid', margin: '10px', padding: '10px' }} >
+        <div onClick={() => setCount(count+1)} >
             <div>
                 This is not a secret:
                 <p id="PUBLIC">
-                    <span> PUBLIC_CONTENT_NOT_ONLY_ACCESSIBLE_TO_LAVADOME </span>
+                    <span> PUBLIC_CONTENT_ACCESSIBLE_TO_ALL </span>
                 </p>
             </div>
             <div>
@@ -22,7 +25,7 @@ export default function App() {
                 <p id="PRIVATE">
                     <LavaDomeReact
                         unsafeOpenModeShadow={unsafeOpenModeShadow}
-                        text={toLavaDomeToken(`SECRET_CONTENT_ONLY_ACCESSIBLE_TO_LAVADOME: "${count}"`)}
+                        text={toLavaDomeToken(secret + ' ')}
                     />
                 </p>
             </div>

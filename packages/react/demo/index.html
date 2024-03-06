@@ -1,16 +1,84 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🌋</text></svg>">
     <title>LavaDome (React) Demo</title>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script>
-        setTimeout(_ => start(document.querySelector('#root')), 100);
-    </script>
+    <style>
+        li {
+            padding: 3px 10px;
+        }
+    </style>
 </head>
-<body>
-    <div id="root"></div>
+<script>
+    top.start = function(root) {
+        root.innerHTML = `
+            <div>
+                Currently, the LavaDomeReact demo only works locally by:
+                <li> cloning the
+                <a href="https://github.com/lavamoat/LavaDome">LavaDome repo</a>
+                </li>
+                <li>
+                setting up the project for development
+                </li>
+                and then:
+                <li>
+                running <code>npm run dev</code>
+                in the <code>react</code> package
+                </li>
+                <li>
+                and visiting <code>http://localhost:3000/</code>
+                </li>
+                But if you want to play with the core functionality of LavaDome without locally installing it,
+                you can easily do so by:
+                <li>
+                visiting the <a href="https://lavamoat.github.io/LavaDome/packages/core/demo/">online demo site</a>
+</li>
+            </div>
+        `;
+    }
+</script>
+<body style="max-width: 700px; background-color: #FDDACD " onload="start(PRIVATE)">
+<div id="content" style="padding: 10px">
+    <h1><a href="https://github.com/lavamoat/LavaDome#react">LavaDome (React)</a> 🌋</h1>
+    <blockquote>
+        <p style="padding: 10px">
+            <i>Display sensitive information to the user only you two can access -
+                <a href="https://github.com/lavamoat/LavaDome#README">learn more</a></i>
+        </p>
+    </blockquote>
+    <h1>Demo</h1>
+    <blockquote>
+        <h3><i>~ Can you bypass LavaDome?</i></h3>
+        <ul>
+            <li>Open the devtools and run whatever code you want</li>
+            <li>Use that code to get to the secret part and prove you can access it via JavaScript</li>
+            <ul>
+                <li>Do not test the randomness security of the secret - it's not what this is about </li>
+                <li>You may however assume you know all possible characters the secret may contain</li>
+            </ul>
+            <li>
+                Remember:
+                <ul>
+                    <li>This is a very new project and is at experimental stage ⚠️</li>
+                    <li>It is not unlikely to find ways to bypass it at this point</li>
+                    <li>USE AT YOUR OWN RISK!</li>
+                    <li>If you found a way around LavaDome, please open an issue</li>
+                </ul>
+            </li>
+        </ul>
+    </blockquote>
+</div>
+
+<div id="PRIVATE" style="background-color: #FECDBA; border-style: solid; margin: 10px; padding: 10px">
+    <span> TO BE REPLACED </span>
+</div>
+
+<blockquote>
+    <i>
+        ~ By
+        <a href="https://github.com/LavaMoat">LavaMoat</a> 🌋 @
+        <a href="https://github.com/MetaMask">MetaMask</a> 🦊 @
+        <a href="https://github.com/consensys">Consensys</a> 💙
+    </i>
+</blockquote>
 </body>
 </html>
