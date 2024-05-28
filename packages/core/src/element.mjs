@@ -52,3 +52,7 @@ export const distraction = invoker(creator({
     // font-size smaller than 1px fails to be a distraction on Firefox
     'font-size': '1px',
 }, () => 'span', all));
+
+export const loadable = invoker(creator({
+    'display': 'none',
+}, () => 'iframe'));

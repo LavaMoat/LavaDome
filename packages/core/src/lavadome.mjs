@@ -9,8 +9,10 @@ import {
     appendChild,
     replaceChildren,
     textContentSet,
+    addEventListener,
+    ownerDocument,
 } from './native.mjs';
-import {distraction, unselectable} from './element.mjs';
+import {distraction, loadable, unselectable} from './element.mjs';
 import {getShadow} from './shadow.mjs';
 
 export function LavaDome(host, opts) {
@@ -22,6 +24,11 @@ export function LavaDome(host, opts) {
     // get/create shadow for host (empty shadow content if there's any already)
     const shadow = getShadow(host, opts);
     replaceChildren(shadow);
+
+    // fire everytime instance is reloaded and bail if occurs under non-top documents
+    const ifr = loadable();
+    addEventListener(ifr, 'load', () =>
+        ownerDocument(ifr) !== document && replaceChildren(shadow));
 
     // child of the shadow, where the secret is set, must be unselectable
     const child = unselectable();
@@ -39,6 +46,9 @@ export function LavaDome(host, opts) {
         if (at(from(text), 1) === undefined) {
             return textContentSet(child, text);
         }
+
+        // attach loadable only once per instance to avoid excessive load firing
+        appendChild(shadow, ifr);
 
         // place each char of the secret in its own LavaDome protection instance
         map(from(text), char => {
