@@ -105,7 +105,7 @@ console.log('Program starts here');
 
 That way we guarantee LavaDome gets to prepare itself for safe usage.
 
-Note that this applies similarly to the rest of the LavaDome packages (not just `@lavamoat/lavadome-react`) and that this is true to `require` just as much as to `import`.
+Note that this applies similarly to the rest of the LavaDome packages and not just `@lavamoat/lavadome-react` (so importing more than one of them is unnecessary).
 
 > Jump over to [Security(defensive-coding)](#5-defensive-coding) to learn more.
 
