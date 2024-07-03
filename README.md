@@ -82,6 +82,61 @@ function Secret({ text }) {
 }
 ```
 
+### Safe Usage
+
+Due to web core limitations, in order to integrate LavaDome securely, there are a few things to be aware of that require some active effort by the integrating developer:
+
+#### Execution Order
+
+LavaDome, like any other JavaScript security software, is always vulnerable to code running before it does.
+
+This means that except for code we absolutely trust, LavaDome must be the first piece of code to load in the web application program.
+
+While this doesn't mean that the developer must make use of it immediately (but rather only when they need to), they do however must include the program as soon as possible.
+
+In order to do so correctly (safely), it must be the first import/require declaration in the entire program:
+
+```javascript
+import '@lavamoat/lavadome-react';
+import 'other-stuff';
+
+console.log('Program starts here');
+```
+
+That way we guarantee LavaDome gets to prepare itself for safe usage.
+
+Note that this applies similarly to the rest of the LavaDome packages and not just `@lavamoat/lavadome-react` (so importing more than one of them is unnecessary).
+
+> Jump over to [Security(defensive-coding)](#5-defensive-coding) to learn more.
+
+#### CSP
+
+Due to side channeling attacks and web limitations, importing remote fonts can be a successful technique against LavaDome. Since embedded in the realms of CSS, addressing this issue via LavaDome isn't possible currently.
+
+Luckily, this can be effectively addressed using CSP's `font-src` directive.
+
+To mitigate this form of attack, make sure your web app does not allow fetching fonts from unknown servers.
+
+> Jump over to [Security(side-channeling)](#4-side-channeling) to learn more.
+
+#### Unpredictable Text
+
+Text provided to LavaDome by the developer must be 100% unpredictable, otherwise can be attacked and leaked.
+
+So if your app should present `"your key is 234789"`, this means your DOM structure should be:
+
+```html
+<span>your key is <lavadome>234789</lavadome> </span>
+```
+
+and must not be:
+
+```html
+<span> <lavadome>your key is 234789</lavadome> </span>
+```
+
+> Jump over to [Security(findability)](#2-findability) to learn more.
+
 ### Testing
 
 Integrating `LavaDome` could be tricky in context of testing it, because since `LavaDome` does a good job in hiding the secret, it hides it pretty well from your tests too!
@@ -112,7 +167,7 @@ LavaDomeDebug.getTextByRoot(root) === '123456'; // true
 
 When using web drivers for testing and instructing those to extract the inner text of a `LavaDome` instance root, they will return a string containing both the secret and `LavaDome`s distraction text.
 
-The distraction text is important for security (see [Security(side-channeling)](#5-side-channeling)), but makes web driver extract characters that aren't really part of the secret.
+The distraction text is important for security (see [Security(side-channeling)](#4-side-channeling)), but makes web driver extract characters that aren't really part of the secret.
 
 To solve that, given the text obtained by the web driver, `stripDistractionFromText()` will strip the distraction text from it, leaving only the exact string your tests expect to find.
 
@@ -218,13 +273,15 @@ It's important to address the current security threats that exist with `ShadowDo
 
 Developers might provide **`LavaDome`** with HTML/JS/CSS content that, when loaded, can accidentally or intentionally leak DOM nodes from within the `ShadowDom`, for example by dynamically adding JavaScript code at runtime.
 
+Read [@arxenix](https://github.com/arxenix)'s [research](https://blog.ankursundara.com/shadow-dom/#contenteditable-or-css-injection) to learn more about this technique.
+
 To prevent this possibility, **`LavaDome`** does not accept DOM nodes at all into the shadow DOM tree, and only supports encapsulating plain text. This lets us avoid having to grapple with the security issues inherent in trusting user-supplied HTML/JS/CSS content.
 
 We'd love to revisit this decision in the future as we research a stable and secure means of supporting DOM node and subtree input.
 
-#### 2. Findability ([window.find()](https://blog.ankursundara.com/shadow-dom/#introducing-windowfind-and-text-selections))
+#### 2. Findability
 
-This API allows developers to find and extract DOM nodes by searching for text that they contain. This is the only API that has so far been known to successfully leak DOM nodes from within a `ShadowDom`.
+The [find()](https://developer.mozilla.org/en-US/docs/Web/API/Window/find) API allows developers to find and extract DOM nodes by searching for text that they contain. This is the only API that has so far been known to successfully leak DOM nodes from within a `ShadowDom`.
 
 <details>
 <summary>
@@ -250,6 +307,8 @@ setTimeout(() => {
 
 <div align="center"><img width="800" src="./assets/img2.png" alt="`ShadowDom` bypass Firefox"/></div>
 </details>
+
+Read [@arxenix](https://github.com/arxenix)'s [research](https://blog.ankursundara.com/shadow-dom/#introducing-windowfind-and-text-selections) to learn more about this technique.
 
 To defend against this attack, the **`LavaDome`** consumer must not pass predictable content to the **`LavaDome`** API. While this might sound obvious, developers could easily be tempted to pass **`LavaDome`** an input that looks something like `The secret is: ldsjf9304rjdkn`, which would fully compromise the security of **`LavaDome`**. Even though the `ldsjf9304rjdkn` part is unguessable, the fixed phrase `"The secret is: "` could be exploited to reveal the secret, especially if it was previously exposed in the DOM.
 
@@ -290,11 +349,9 @@ To defend against this attack vector, **`LavaDome`** removes all style attribute
 
 The second technique of using `contenteditable` as an attribute isn't currently relevant as **`LavaDome`** does not support accepting DOM nodes.
 
-#### 3. Selectability ([getSelection](https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection))
+#### 3. Selectability & Secret Splitting
 
-The attack vectors above aren't so useful if `getSelection` is mitigated. By making the text contained in **`LavaDome`** non-selectable, we harden the security against possible injection as demonstrated above. This works well in Chromium, but we are working out some issues with Firefox.
-
-#### 4. Secret splitting
+The attack vectors above aren't so useful if [`getSelection`](https://developer.mozilla.org/en-US/docs/Web/API/Window/getSelection) is mitigated. By making the text contained in **`LavaDome`** non-selectable, we harden the security against possible injection as demonstrated above. This works well in Chromium, but we are working out some issues with Firefox.
 
 If an attacker manages to guess a subset of the secret, they can compromise the entire secret (assuming `getSelection` captures scoped nodes like in Firefox). This is because searching for the subset will leak the text node that includes that subset of the secret, giving the attacker access to the entire secret.
 
@@ -302,17 +359,23 @@ As a countermeasure, **`LavaDome`** stores each character of the secret in its o
 
 A breach is still possible, but only if the attacker brute-forces all possible characters one by one, leaks all of the shadows they find, and then synchronously reorders all of the shadows correctly to align with their respective positions within the **`LavaDome`** main host.
 
-> NOTICE: This technique was proven to be possible against LavaDome (see [#15](https://github.com/LavaMoat/LavaDome/issues/15#issuecomment-1873375440)), but only in Firefox.
-
-#### 5. Side channeling
+#### 4. Side channeling
 
 Another well known attack is to leak contents of ShadowDOMs using inheritable CSS properties such as `@font-face` to a remote server, character by character.
 
-To address that, LavaDome adds to the parent Shadow all characters possible, so that such leaking attempt is confused when finding all possible characters, leaving this attack useless.
+Consider the following attack [research](https://mksben.l0.cm/2015/10/css-based-attack-abusing-unicode-range.html) documented by [@masatokinugawa](https://github.com/masatokinugawa).
 
-> NOTICE: This technique was proven to be possible against LavaDome (see [#16](https://github.com/LavaMoat/LavaDome/issues/16#issue-2067572697))
+To address that, LavaDome adds to the parent Shadow all characters possible, so that such leaking attempt is confused when finding all possible characters, leaving this attack useless (see https://github.com/LavaMoat/LavaDome/issues/16).
 
-#### 6. Defensive coding
+Of course, side channeling comes in many forms, some harder to address, such as [@securityMB](https://github.com/securityMB)'s [research](https://research.securitum.com/stealing-data-in-great-style-how-to-use-css-to-attack-web-application/) where he uses ligature fonts (exploit by [@masatokinugawa](https://github.com/masatokinugawa) @ https://github.com/LavaMoat/LavaDome/issues/40).
+
+To address that, developers adopting LavaDome are expected to dictate a strict `font-src` CSP policy to make sure leakage by fonts isn't possible to remote uncontrollable servers.
+
+Worth noting that this (theoretically) won't be useful in Safari where this attack can be carried using local SVG to form the fonts, thus allowing attackers to remain independent of CSP (see WIP @ https://github.com/LavaMoat/LavaDome/issues/40#issuecomment-2090318009).
+
+Another great example for side channeling attacks - this time not using fonts - is by leveraging text fragments (see [@masatokinugawa](https://github.com/masatokinugawa) [exploit](https://github.com/LavaMoat/LavaDome/issues/35)).
+
+#### 5. Defensive coding
 
 A secure solution requires defensive coding practices.
 
@@ -326,9 +389,11 @@ A secure solution requires defensive coding practices.
 
 Therefore, we recommend always integrating such security solutions with the [SES](https://github.com/endojs/endo/tree/master/packages/ses#ses) technology developed by [@agoric](https://github.com/agoric). This is a security practice followed at [LavaMoat](https://github.com/lavamoat/lavamoat) and [MetaMask](https://github.com/MetaMask/metamask-extension).
 
-#### 7. React internals processing leakage
+#### 6. React internals processing leakage
 
 Another thing to worry about (specifically in context of React) is the fact that input provided to React components is being actively leaked by it to the global object, thus making it up for grabs for untrusted entities running in the app (which undermines `LavaDome`'s goal completely).
+
+Refer to [naugtur](https://github.com/naugtur)'s [discovery](https://github.com/LavaMoat/LavaDome/pull/23#issue-2093459897) to learn more.
 
 To balance our intention to support React with how we can't trust it with our secret, `LavaDomeReact` package exports some minimal (yet safe) functionality to exchange the secret with a special token before passing it on to React, where the only entity that can exchange that token back to the secret is `LavaDome` itself.
 
