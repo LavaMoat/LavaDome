@@ -90,7 +90,7 @@ Due to web core limitations, in order to integrate LavaDome securely, there are 
 
 LavaDome, like any other JavaScript security software, is always vulnerable to code running before it does.
 
-This means that except for code web absolutely trust, LavaDome must be the first piece of code to load in the web application program.
+This means that except for code we absolutely trust, LavaDome must be the first piece of code to load in the web application program.
 
 While this doesn't mean that the developer must make use of it immediately (but rather only when they need to), they do however must include the program as soon as possible.
 
