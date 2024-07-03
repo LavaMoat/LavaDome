@@ -119,6 +119,24 @@ To mitigate this form of attack, make sure your web app does not allow fetching 
 
 > Jump over to [Security(side-channeling)](#4-side-channeling) to learn more.
 
+#### Unpredictable Text
+
+Text provided to LavaDome by the developer must be 100% unpredictable, otherwise can be attacked and leaked.
+
+So if your app should present `"your key is 234789"`, this means your DOM structure should be:
+
+```html
+<span>your key is <lavadome>234789</lavadome> </span>
+```
+
+and must not be:
+
+```html
+<span> <lavadome>your key is 234789</lavadome> </span>
+```
+
+> Jump over to [Security(findability)](#2-findability) to learn more.
+
 ### Testing
 
 Integrating `LavaDome` could be tricky in context of testing it, because since `LavaDome` does a good job in hiding the secret, it hides it pretty well from your tests too!
