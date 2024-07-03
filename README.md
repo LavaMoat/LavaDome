@@ -86,7 +86,7 @@ function Secret({ text }) {
 
 Due to web core limitations, in order to integrate LavaDome securely, there are a few things to be aware of that require some active effort by the integrating developer:
 
-#### Execution order
+#### Execution Order
 
 LavaDome, like any other JavaScript security software, is always vulnerable to code running before it does.
 
