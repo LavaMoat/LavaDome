@@ -10,7 +10,7 @@ import {
     replaceChildren,
     textContentSet,
 } from './native.mjs';
-import {distraction, unselectable} from './element.mjs';
+import {distraction, hardened} from './element.mjs';
 import {getShadow} from './shadow.mjs';
 
 export function LavaDome(host, opts) {
@@ -23,8 +23,8 @@ export function LavaDome(host, opts) {
     const shadow = getShadow(host, opts);
     replaceChildren(shadow);
 
-    // child of the shadow, where the secret is set, must be unselectable
-    const child = unselectable();
+    // child of the shadow, where the secret is set, must be hardened
+    const child = hardened();
     appendChild(shadow, child);
 
     function text(text) {
