@@ -31,10 +31,9 @@ export function LavaDome(host, opts) {
         const ownerDoc = ownerDocument(ifr);
         if (ownerDoc !== document) {
             replaceChildren(shadow);
-            console.warn('LavaDome:',
-                `The document to which LavaDome was originally introduced: `, document,
-                `must be the same as the one this instance is inserted to: `, ownerDoc,
-            );
+            throw new Error(`LavaDomeCore: ` +
+                `The document to which LavaDome was originally introduced ` +
+                `must be the same as the one this instance is inserted to`);
         }
     });
 
