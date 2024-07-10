@@ -27,8 +27,16 @@ export function LavaDome(host, opts) {
 
     // fire everytime instance is reloaded and bail if occurs under non-top documents
     const ifr = loadable();
-    addEventListener(ifr, 'load', () =>
-        ownerDocument(ifr) !== document && replaceChildren(shadow));
+    addEventListener(ifr, 'load', () => {
+        const ownerDoc = ownerDocument(ifr);
+        if (ownerDoc !== document) {
+            replaceChildren(shadow);
+            console.warn('LavaDome:',
+                `The document to which LavaDome was originally introduced: `, document,
+                `must be the same as the one this instance is inserted to: `, ownerDoc,
+            );
+        }
+    });
 
     // child of the shadow, where the secret is set, must be unselectable
     const child = unselectable();
