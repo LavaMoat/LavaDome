@@ -18,10 +18,10 @@
 
                 return function start(root) {
                     root.innerHTML = '';
-                    const lavadome = new LavaDomeCore(root, {
+                    top.lavadome = new LavaDomeCore(root, {
                         unsafeOpenModeShadow,
                     });
-                    lavadome.text(secret);
+                    top.lavadome.text(secret);
                     console.log(
                         'DEMO(LavaDomeDebug):',
                         `Since 'unsafeOpenModeShadow' is ${unsafeOpenModeShadow ? 'ENABLED' : 'DISABLED'}, here's the secret:`,
@@ -71,7 +71,7 @@
                 </p>
             </div>
             <div>
-                This is a secret:
+                This is a secret (<a href="javascript:top.lavadome.copy()">copy to clipboard</a>):
                 <p id="PRIVATE">
                     <span> TO BE REPLACED </span>
                 </p>

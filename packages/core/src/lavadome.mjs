@@ -9,6 +9,8 @@ import {
     appendChild,
     replaceChildren,
     textContentSet,
+    Blob, ClipboardItem,
+    write, clipboard,
 } from './native.mjs';
 import {distraction, unselectable} from './element.mjs';
 import {getShadow} from './shadow.mjs';
@@ -17,7 +19,10 @@ export function LavaDome(host, opts) {
     opts = options(opts);
     
     // make exported API tamper-proof
-    defineProperties(this, {text: {value: text}});
+    defineProperties(this, {
+        text: {value: text},
+        copy: {value: copy},
+    });
 
     // get/create shadow for host (empty shadow content if there's any already)
     const shadow = getShadow(host, opts);
@@ -26,6 +31,8 @@ export function LavaDome(host, opts) {
     // child of the shadow, where the secret is set, must be unselectable
     const child = unselectable();
     appendChild(shadow, child);
+
+    let secret = '';
 
     function text(text) {
         if (typeof text !== 'string') {
@@ -40,6 +47,8 @@ export function LavaDome(host, opts) {
             return textContentSet(child, text);
         }
 
+        secret = text;
+
         // place each char of the secret in its own LavaDome protection instance
         map(from(text), char => {
             const span = createElement(document, 'span');
@@ -51,5 +60,12 @@ export function LavaDome(host, opts) {
 
         // add a distraction against side channel leaks attack attempts
         appendChild(child, distraction());
+    }
+
+    async function copy() {
+        const type = 'text/plain';
+        const blob = new Blob([secret], {type});
+        const data = [new ClipboardItem({[type]: blob})];
+        await write(clipboard, data);
     }
 }
