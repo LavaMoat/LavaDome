@@ -8,8 +8,9 @@ const
     tokenToDepMap = new WeakMap(),
     textToTokenMap = create(null);
 
-// map sensitive text of the user with a unique token representing it, so that the
-// token is the one being passed around React internals rather than the sensitive text
+// transform provided sensitive text into lavadome capabilities such as:
+// 1. unique token representing the text, so that it's the one tossed around React internals instead of the sensitive text
+// 2. copy callback that's when invoked copies the sensitive text to clipboard
 export const textToLavaDomeCapabilities = text => {
     if (typeof text !== 'string') {
         throw new Error(`LavaDomeReact: first argument must be a string, instead got ${stringify(text)}`);
