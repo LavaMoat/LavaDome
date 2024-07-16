@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { LavaDome as LavaDomeCore } from "@lavamoat/lavadome-core"
-import {create, hasOwn, stringify, WeakMap, get, set, isArray} from "@lavamoat/lavadome-core/src/native.mjs";
+import {create, hasOwn, stringify, WeakMap, get, set, isArray, at} from "@lavamoat/lavadome-core/src/native.mjs";
 
 const
     tokenToCopyInvokerMap = new WeakMap(),
@@ -63,7 +63,7 @@ export const LavaDome = ({ token, unsafeOpenModeShadow }) => {
             <LavaDomeShadow
                 host={host}
                 // accept both formats (token, or [token, copy])
-                token={isArray(token) ? token[0] : token}
+                token={isArray(token) ? at(token, 0) : token}
                 unsafeOpenModeShadow={unsafeOpenModeShadow}
             />
         </span>
