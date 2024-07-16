@@ -8,9 +8,10 @@ const secret = blobURL.split('/')[3].split('-').join('');
 URL.revokeObjectURL(blobURL);
 
 function Copy({copier}) {
-    return <button onClick={copier}>
+    top.copier = copier;
+    return <a href={'javascript:copier()'}>
         copy to clipboard
-    </button>;
+    </a>;
 }
 
 export default function App() {
