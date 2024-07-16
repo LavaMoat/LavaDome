@@ -1,4 +1,5 @@
 'use strict';
 
-import {LavaDome, textToToken} from "./lavadome";
-export {LavaDome, textToToken as toLavaDomeToken};
+import {LavaDome, textToLavaDomeCapabilities} from "./lavadome";
+// TODO: come up with a better name than "toLavaDomeCapabilities"
+export {LavaDome, textToLavaDomeCapabilities as toLavaDomeCapabilities};

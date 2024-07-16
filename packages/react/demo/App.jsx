@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LavaDome as LavaDomeReact, toLavaDomeToken } from '../src/index';
+import { LavaDome as LavaDomeReact, toLavaDomeCapabilities } from '../src/index';
 
 const unsafeOpenModeShadow = location.href.includes('unsafeOpenModeShadow');
 
@@ -7,10 +7,18 @@ const blobURL = URL.createObjectURL(new Blob());
 const secret = blobURL.split('/')[3].split('-').join('');
 URL.revokeObjectURL(blobURL);
 
+function Copy({copier}) {
+    return <button onClick={copier}>
+        copy to clipboard
+    </button>;
+}
+
 export default function App() {
     const [count, setCount] = useState(0);
 
     console.info('render marked', count);
+
+    const [token, copy] = toLavaDomeCapabilities(secret);
 
     return (
         <div onClick={() => setCount(count+1)} >
@@ -21,11 +29,11 @@ export default function App() {
                 </p>
             </div>
             <div>
-                This is a secret:
+                This is a secret (<Copy copier={copy}/>):
                 <p id="PRIVATE">
                     <LavaDomeReact
                         unsafeOpenModeShadow={unsafeOpenModeShadow}
-                        text={toLavaDomeToken(secret + ' ')}
+                        token={token}
                     />
                 </p>
             </div>

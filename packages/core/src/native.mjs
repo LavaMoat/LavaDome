@@ -13,7 +13,7 @@ const {
     getOwnPropertyDescriptor,
     entries, create, hasOwn,
 } = Object;
-const { from } = Array;
+const { from, isArray } = Array;
 const {random } = Math;
 const { stringify } = JSON;
 const { clipboard } = navigator;
@@ -51,7 +51,7 @@ export {
     getOwnPropertyDescriptor,
     entries, create, hasOwn,
     // Array
-    from,
+    from, isArray,
     // Math
     random,
     // JSON
