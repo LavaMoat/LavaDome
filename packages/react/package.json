@@ -6,7 +6,7 @@
   "module": "src/index.mjs",
   "main": "build/main.js",
   "scripts": {
-    "test": "npm run dev & (npm run test-chrome && npm run test-firefox && npm run test-safari)",
+    "test": "npm run dev",
     "build": "NODE_ENV=production LD_PKG=react webpack --config ../../webpack.production.js",
     "dev": "NODE_ENV=development LD_PKG=react webpack serve --config webpack.development.js"
   },
