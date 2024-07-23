@@ -24,6 +24,11 @@
     "demo": "npm run build-demo && serve ./demo -l 3000",
     "test": "npm run demo & npm run test-chrome && npm run test-firefox && npm run test-safari"
   },
+  "engines": {
+    "node": "^20 || >=22",
+    "npm": "^10"
+  },
+  "packageManager": "npm@10.8.2",
   "lavamoat": {
     "allowScripts": {
       "@lavamoat/preinstall-always-fail": false
