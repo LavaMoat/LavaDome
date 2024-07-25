@@ -4,16 +4,19 @@ const {
     Object, Array,
     Function, Math,
     parseInt, WeakMap,
-    Error, JSON,
+    Error, JSON, Blob,
+    ClipboardItem,
+    navigator,
 } = globalThis;
 const {
     defineProperties, assign,
     getOwnPropertyDescriptor,
     entries, create, hasOwn,
 } = Object;
-const { from } = Array;
+const { from, isArray } = Array;
 const {random } = Math;
 const { stringify } = JSON;
+const { clipboard } = navigator;
 
 // native generation util
 const n = (obj, prop, accessor) =>
@@ -32,20 +35,23 @@ export const keys = n(globalThis?.Array?.prototype, 'keys', 'value');
 export const at = n(globalThis?.Array?.prototype, 'at', 'value');
 export const get = n(globalThis?.WeakMap?.prototype, 'get', 'value');
 export const set = n(globalThis?.WeakMap?.prototype, 'set', 'value');
-export const toFixed = n(globalThis?.Number?.prototype, 'toFixed', 'value')
+export const toFixed = n(globalThis?.Number?.prototype, 'toFixed', 'value');
+export const write = n(globalThis?.Clipboard?.prototype, 'write', 'value');
 
 export {
     // window
     Object, Array,
     Function, Math,
     parseInt, WeakMap,
-    Error, JSON,
+    Error, JSON, Blob,
+    ClipboardItem,
+    navigator, clipboard,
     // Object
     defineProperties, assign,
     getOwnPropertyDescriptor,
     entries, create, hasOwn,
     // Array
-    from,
+    from, isArray,
     // Math
     random,
     // JSON
