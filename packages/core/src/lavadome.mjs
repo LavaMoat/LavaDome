@@ -11,9 +11,23 @@ import {
     textContentSet,
     Blob, ClipboardItem,
     write, clipboard,
+    navigation,
+    url, destination, includes,
+    preventDefault, stopPropagation,
 } from './native.mjs';
 import {distraction, unselectable} from './element.mjs';
 import {getShadow} from './shadow.mjs';
+
+// text-fragments links can be abused to leak shadow internals - block in-app redirection to them
+navigation.addEventListener('navigate', event => {
+    const dest = url(destination(event));
+    if (includes(dest, ':~:')) {
+        preventDefault(event);
+        stopPropagation(event);
+        throw new Error(
+            `LavaDomeCore: in-app redirection to text-fragments links is blocked to ensure security`);
+    }
+});
 
 export function LavaDome(host, opts) {
     opts = options(opts);
