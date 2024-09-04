@@ -11,7 +11,6 @@ lavadome.js
 npm-debug.log
 yarn-error.log
 node_modules
-package-lock.json
 
 # yarn v3 (w/o zero-install)
 # See: https://yarnpkg.com/getting-started/qa#which-files-should-be-gitignored

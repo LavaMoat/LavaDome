@@ -13,6 +13,10 @@
     "@lavamoat/lavadome-core": "^0.0.17",
     "@lavamoat/preinstall-always-fail": "^2.0.0"
   },
+  "devDependencies": {
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
   "scripts": {
     "build": "NODE_ENV=production LD_PKG=javascript webpack --config ../../webpack.production.js",
     "build-demo-watch": "while true; do npm run build-demo; sleep 1; done",
@@ -20,6 +24,11 @@
     "demo": "npm run build-demo && serve ./demo -l 3000",
     "test": "npm run demo & npm run test-chrome && npm run test-firefox && npm run test-safari"
   },
+  "engines": {
+    "node": "^20 || >=22",
+    "npm": "^10"
+  },
+  "packageManager": "npm@10.8.2",
   "lavamoat": {
     "allowScripts": {
       "@lavamoat/preinstall-always-fail": false

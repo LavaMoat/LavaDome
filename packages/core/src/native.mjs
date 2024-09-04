@@ -5,6 +5,7 @@ const {
     Function, Math,
     parseInt, WeakMap,
     Error, JSON,
+    navigation,
 } = globalThis;
 const {
     defineProperties, assign,
@@ -28,13 +29,18 @@ export const appendChild = n(globalThis?.Node?.prototype, 'appendChild', 'value'
 export const textContentSet = n(globalThis?.Node?.prototype, 'textContent', 'set');
 export const setAttribute = n(globalThis?.Element?.prototype, 'setAttribute', 'value');
 export const toUpperCase = n(globalThis?.String?.prototype, 'toUpperCase', 'value');
+export const includes = n(globalThis?.String?.prototype, 'includes', 'value');
 export const map = n(globalThis?.Array?.prototype, 'map', 'value');
 export const join = n(globalThis?.Array?.prototype, 'join', 'value');
 export const keys = n(globalThis?.Array?.prototype, 'keys', 'value');
 export const at = n(globalThis?.Array?.prototype, 'at', 'value');
 export const get = n(globalThis?.WeakMap?.prototype, 'get', 'value');
 export const set = n(globalThis?.WeakMap?.prototype, 'set', 'value');
-export const toFixed = n(globalThis?.Number?.prototype, 'toFixed', 'value')
+export const toFixed = n(globalThis?.Number?.prototype, 'toFixed', 'value');
+export const destination = n(globalThis?.NavigateEvent?.prototype, 'destination', 'get');
+export const url = n(globalThis?.NavigationDestination?.prototype, 'url', 'get');
+export const preventDefault = n(globalThis?.Event?.prototype, 'preventDefault', 'value');
+export const stopPropagation = n(globalThis?.Event?.prototype, 'stopPropagation', 'value');
 
 export {
     // window
@@ -42,6 +48,7 @@ export {
     Function, Math,
     parseInt, WeakMap,
     Error, JSON,
+    navigation,
     // Object
     defineProperties, assign,
     getOwnPropertyDescriptor,

@@ -16,6 +16,15 @@
   "dependencies": {
     "@lavamoat/preinstall-always-fail": "^2.0.0"
   },
+  "devDependencies": {
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4"
+  },
+  "engines": {
+    "node": "^20 || >=22",
+    "npm": "^10"
+  },
+  "packageManager": "npm@10.8.2",
   "lavamoat": {
     "allowScripts": {
       "@lavamoat/preinstall-always-fail": false
