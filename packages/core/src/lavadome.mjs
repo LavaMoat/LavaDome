@@ -39,7 +39,7 @@ export function LavaDome(host, opts) {
     const shadow = getShadow(host, opts);
     replaceChildren(shadow);
 
-    // fire everytime instance is reloaded and bail if occurs under non-top documents
+    // fire every time instance is reloaded and abort loading for non-top documents
     const ifr = loadable();
     addEventListener(ifr, 'load', () => {
         const ownerDoc = ownerDocument(ifr);
