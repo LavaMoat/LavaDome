@@ -15,7 +15,7 @@ import {
     url, destination, includes,
     preventDefault, stopPropagation,
 } from './native.mjs';
-import {distraction, loadable, unselectable} from './element.mjs';
+import {distraction, loadable, hardened} from './element.mjs';
 import {getShadow} from './shadow.mjs';
 
 // text-fragments links can be abused to leak shadow internals - block in-app redirection to them
@@ -51,8 +51,8 @@ export function LavaDome(host, opts) {
         }
     });
 
-    // child of the shadow, where the secret is set, must be unselectable
-    const child = unselectable();
+    // child of the shadow, where the secret is set, must be hardened
+    const child = hardened();
     appendChild(shadow, child);
 
     function text(text) {

@@ -36,8 +36,10 @@ function creator(style, tag, text = '') {
 
 const invoker = creator => () => creator();
 
-// an element that is hard to find/select
-export const unselectable = invoker(creator({
+// an element that it should be hard to find/select/leak from/etc
+export const hardened = invoker(creator({
+    // decide on an unguessable font-family (non-existing) so an external one cannot be applied
+    'font-family': rand(20),
     // makes element uneditable to prevent document.execCommand HTML injection attacks
     '-webkit-user-modify': 'unset',
     // makes element unselectable to prevent getSelection attacks
