@@ -48,23 +48,23 @@ export function LavaDome(host, opts) {
 
     let secret = '';
 
-    function text(text) {
-        if (typeof text !== 'string') {
+    function text(input) {
+        if (typeof input !== 'string') {
             throw new Error(
-                `LavaDomeCore: first argument must be a string, instead got ${stringify(text)}`);
+                `LavaDomeCore: first argument must be a string, instead got ${stringify(input)}`);
         }
 
         // check if text is a single char and if so, either is part of a longer secret
         // which is protected by the parent LavaDome, or simply a single char provided by
         // consumer either way - not worth attempting to secure
-        if (at(from(text), 1) === undefined) {
-            return textContentSet(child, text);
+        if (at(from(input), 1) === undefined) {
+            return textContentSet(child, input);
         }
 
-        secret = text;
+        secret = input;
 
         // place each char of the secret in its own LavaDome protection instance
-        map(from(text), char => {
+        map(from(input), char => {
             const span = createElement(document, 'span');
             // mark as internal LavaDome instance
             opts[OPTIONS.isInnerInstance] = true;
