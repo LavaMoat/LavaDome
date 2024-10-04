@@ -20,6 +20,8 @@ const { stringify } = JSON;
 const n = (obj, prop, accessor) =>
     obj && Function.prototype.call.bind(getOwnPropertyDescriptor(obj, prop)[accessor]);
 
+export const ownerDocument = n(globalThis?.Node?.prototype, 'ownerDocument', 'get');
+export const addEventListener = n(globalThis?.EventTarget?.prototype, 'addEventListener', 'value');
 export const replaceChildren = n(globalThis?.DocumentFragment?.prototype, 'replaceChildren', 'value');
 export const attachShadow = n(globalThis?.Element?.prototype, 'attachShadow', 'value');
 export const createElement = n(globalThis?.Document?.prototype, 'createElement', 'value');

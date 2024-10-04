@@ -9,11 +9,13 @@ import {
     appendChild,
     replaceChildren,
     textContentSet,
+    addEventListener,
+    ownerDocument,
     navigation,
     url, destination, includes,
     preventDefault, stopPropagation,
 } from './native.mjs';
-import {distraction, hardened} from './element.mjs';
+import {distraction, loadable, hardened} from './element.mjs';
 import {getShadow} from './shadow.mjs';
 
 // text-fragments links can be abused to leak shadow internals - block in-app redirection to them
@@ -37,6 +39,18 @@ export function LavaDome(host, opts) {
     const shadow = getShadow(host, opts);
     replaceChildren(shadow);
 
+    // fire every time instance is reloaded and abort loading for non-top documents
+    const iframe = loadable();
+    addEventListener(iframe, 'load', () => {
+        const ownerDoc = ownerDocument(iframe);
+        if (ownerDoc !== document) {
+            replaceChildren(shadow);
+            throw new Error(`LavaDomeCore: ` +
+                `The document to which LavaDome was originally introduced ` +
+                `must be the same as the one this instance is inserted to`);
+        }
+    });
+
     // child of the shadow, where the secret is set, must be hardened
     const child = hardened();
     appendChild(shadow, child);
@@ -53,6 +67,9 @@ export function LavaDome(host, opts) {
         if (at(from(text), 1) === undefined) {
             return textContentSet(child, text);
         }
+
+        // attach loadable only once per instance to avoid excessive load firing
+        appendChild(shadow, iframe);
 
         // place each char of the secret in its own LavaDome protection instance
         map(from(text), char => {
