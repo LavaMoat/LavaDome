@@ -63,9 +63,10 @@ export function LavaDome(host, opts) {
     let secret = '';
 
     function text(input) {
-        if (typeof input !== 'string') {
+        const type = typeof input;
+        if (type !== 'string') {
             throw new Error(
-                `LavaDomeCore: first argument must be a string, instead got ${stringify(input)}`);
+                `LavaDomeCore: first argument must be a string, instead got ${type}`);
         }
 
         // check if text is a single char and if so, either is part of a longer secret
