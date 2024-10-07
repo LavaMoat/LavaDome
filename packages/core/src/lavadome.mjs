@@ -4,7 +4,7 @@ import {OPTIONS, options} from './options.mjs';
 import {
     Error, map, at,
     defineProperties,
-    from, stringify,
+    from,
     createElement,
     appendChild,
     replaceChildren,

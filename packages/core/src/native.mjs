@@ -4,7 +4,7 @@ const {
     Object, Array,
     Function, Math,
     parseInt, WeakMap,
-    Error, JSON, Blob,
+    Error, Blob,
     ClipboardItem,
     navigator,
     navigation,
@@ -16,7 +16,6 @@ const {
 } = Object;
 const { from, isArray } = Array;
 const {random } = Math;
-const { stringify } = JSON;
 const { clipboard } = navigator;
 
 // native generation util
@@ -51,7 +50,7 @@ export {
     Object, Array,
     Function, Math,
     parseInt, WeakMap,
-    Error, JSON, Blob,
+    Error, Blob,
     ClipboardItem,
     navigator, clipboard,
     navigation,
@@ -63,6 +62,4 @@ export {
     from, isArray,
     // Math
     random,
-    // JSON
-    stringify,
 }

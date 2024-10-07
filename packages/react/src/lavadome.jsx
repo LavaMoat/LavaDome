@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { LavaDome as LavaDomeCore } from "@lavamoat/lavadome-core"
-import {create, hasOwn, stringify, WeakMap, get, set, isArray, at} from "@lavamoat/lavadome-core/src/native.mjs";
+import {create, hasOwn, WeakMap, get, set, isArray, at, Error} from "@lavamoat/lavadome-core/src/native.mjs";
 
 const
     tokenToCopyInvokerMap = new WeakMap(),
@@ -12,8 +12,10 @@ const
 // 1. unique token representing the text, so that it's the one tossed around React internals instead of the sensitive text
 // 2. copy callback that's when invoked copies the sensitive text to clipboard
 export const textToLavaDomeCapabilities = text => {
-    if (typeof text !== 'string') {
-        throw new Error(`LavaDomeReact: first argument must be a string, instead got ${stringify(text)}`);
+    const type = typeof text;
+    if (type !== 'string') {
+        throw new Error(
+            `LavaDomeReact: first argument must be a string, instead got ${type}`);
     }
 
     if (!hasOwn(textToTokenMap, text)) {
