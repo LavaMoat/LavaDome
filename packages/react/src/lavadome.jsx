@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { LavaDome as LavaDomeCore } from "@lavamoat/lavadome-core"
-import {create, hasOwn, WeakMap, get, set, isArray, at, Error} from "@lavamoat/lavadome-core/src/native.mjs";
+import {create, hasOwn, WeakMap, get, set, isArray, at, Error, TypeError} from "@lavamoat/lavadome-core/src/native.mjs";
 
 const
     tokenToCopyInvokerMap = new WeakMap(),
@@ -14,7 +14,7 @@ const
 export const textToLavaDomeCapabilities = text => {
     const type = typeof text;
     if (type !== 'string') {
-        throw new Error(
+        throw new TypeError(
             `LavaDomeReact: first argument must be a string, instead got ${type}`);
     }
 

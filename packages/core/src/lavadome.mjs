@@ -2,7 +2,7 @@
 
 import {OPTIONS, options} from './options.mjs';
 import {
-    Error, map, at,
+    Error, map, at, TypeError,
     defineProperties,
     from,
     createElement,
@@ -65,7 +65,7 @@ export function LavaDome(host, opts) {
     function text(input) {
         const type = typeof input;
         if (type !== 'string') {
-            throw new Error(
+            throw new TypeError(
                 `LavaDomeCore: first argument must be a string, instead got ${type}`);
         }
 
