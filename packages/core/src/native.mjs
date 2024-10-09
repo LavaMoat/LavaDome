@@ -4,7 +4,9 @@ const {
     Object, Array,
     Function, Math,
     parseInt, WeakMap,
-    Error, JSON,
+    Error, Blob, TypeError,
+    ClipboardItem,
+    navigator,
     navigation,
 } = globalThis;
 const {
@@ -14,7 +16,7 @@ const {
 } = Object;
 const { from } = Array;
 const {random } = Math;
-const { stringify } = JSON;
+const { clipboard } = navigator;
 
 // native generation util
 const n = (obj, prop, accessor) =>
@@ -37,6 +39,7 @@ export const at = n(globalThis?.Array?.prototype, 'at', 'value');
 export const get = n(globalThis?.WeakMap?.prototype, 'get', 'value');
 export const set = n(globalThis?.WeakMap?.prototype, 'set', 'value');
 export const toFixed = n(globalThis?.Number?.prototype, 'toFixed', 'value');
+export const write = n(globalThis?.Clipboard?.prototype, 'write', 'value');
 export const destination = n(globalThis?.NavigateEvent?.prototype, 'destination', 'get');
 export const url = n(globalThis?.NavigationDestination?.prototype, 'url', 'get');
 export const preventDefault = n(globalThis?.Event?.prototype, 'preventDefault', 'value');
@@ -47,7 +50,9 @@ export {
     Object, Array,
     Function, Math,
     parseInt, WeakMap,
-    Error, JSON,
+    Error, Blob, TypeError,
+    ClipboardItem,
+    navigator, clipboard,
     navigation,
     // Object
     defineProperties, assign,
@@ -57,6 +62,4 @@ export {
     from,
     // Math
     random,
-    // JSON
-    stringify,
 }
