@@ -19,7 +19,7 @@ export default function App() {
 
     console.info('render marked', count);
 
-    const [token, copy] = toLavaDomeCapabilities(secret);
+    const {token, copy} = toLavaDomeCapabilities(secret);
 
     return (
         <div onClick={() => setCount(count+1)} >

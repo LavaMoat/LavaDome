@@ -14,7 +14,7 @@ const {
     getOwnPropertyDescriptor,
     entries, create, hasOwn,
 } = Object;
-const { from, isArray } = Array;
+const { from } = Array;
 const {random } = Math;
 const { clipboard } = navigator;
 
@@ -59,7 +59,7 @@ export {
     getOwnPropertyDescriptor,
     entries, create, hasOwn,
     // Array
-    from, isArray,
+    from,
     // Math
     random,
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { LavaDome as LavaDomeCore } from "@lavamoat/lavadome-core"
-import {create, hasOwn, WeakMap, get, set, isArray, at, Error, TypeError} from "@lavamoat/lavadome-core/src/native.mjs";
+import {create, hasOwn, WeakMap, get, set, Error, TypeError} from "@lavamoat/lavadome-core/src/native.mjs";
 
 const
     tokenToCopyInvokerMap = new WeakMap(),
@@ -28,7 +28,7 @@ export const textToLavaDomeCapabilities = text => {
     const token = textToTokenMap[text];
     const copy = () => get(tokenToCopyInvokerMap, token)();
 
-    return [token, copy];
+    return {token, copy};
 }
 
 // we want to use the token as a useEffect dep, but we don't want to leak it to React
@@ -63,9 +63,7 @@ export const LavaDome = ({ token, unsafeOpenModeShadow }) => {
         // form a span to act as the LavaDome host
         <span ref={host}>
             <LavaDomeShadow
-                host={host}
-                // accept both formats (token, or [token, copy])
-                token={isArray(token) ? at(token, 0) : token}
+                host={host} token={token}
                 unsafeOpenModeShadow={unsafeOpenModeShadow}
             />
         </span>
@@ -82,8 +80,8 @@ function LavaDomeShadow({ host, token, unsafeOpenModeShadow }) {
     // update lavadome secret text (given that the token is updated too)
     useEffect(() => {
         const lavadome = new LavaDomeCore(host.current, {unsafeOpenModeShadow});
-        set(tokenToCopyInvokerMap, token, lavadome.copy);
         lavadome.text(text);
+        set(tokenToCopyInvokerMap, token, lavadome.copy);
     }, [dep]);
 
     return <></>;
