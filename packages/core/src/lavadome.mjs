@@ -19,7 +19,7 @@ import {distraction, loadable, hardened} from './element.mjs';
 import {getShadow} from './shadow.mjs';
 
 // text-fragments links can be abused to leak shadow internals - block in-app redirection to them
-navigation.addEventListener('navigate', event => {
+navigation?.addEventListener('navigate', event => {
     const dest = url(destination(event));
     if (includes(dest, ':~:')) {
         preventDefault(event);
