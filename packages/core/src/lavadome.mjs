@@ -31,7 +31,7 @@ navigation?.addEventListener('navigate', event => {
 
 export function LavaDome(host, opts) {
     opts = options(opts);
-    
+
     // make exported API tamper-proof
     defineProperties(this, {text: {value: text}});
 
@@ -41,15 +41,16 @@ export function LavaDome(host, opts) {
 
     // fire every time instance is reloaded and abort loading for non-top documents
     const iframe = loadable();
-    addEventListener(iframe, 'load', () => {
+    iframe.setAttribute('srcdoc', '<script>frameElement.xxx()</script>');
+    defineProperties(iframe, { xxx: { value: () => {
         const ownerDoc = ownerDocument(iframe);
         if (ownerDoc !== document) {
             replaceChildren(shadow);
             throw new Error(`LavaDomeCore: ` +
                 `The document to which LavaDome was originally introduced ` +
                 `must be the same as the one this instance is inserted to`);
-        }
-    });
+        }}}}
+    );
 
     // child of the shadow, where the secret is set, must be hardened
     const child = hardened();
