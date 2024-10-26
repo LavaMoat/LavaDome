@@ -35,6 +35,7 @@ export const map = n(globalThis?.Array?.prototype, 'map', 'value');
 export const join = n(globalThis?.Array?.prototype, 'join', 'value');
 export const keys = n(globalThis?.Array?.prototype, 'keys', 'value');
 export const at = n(globalThis?.Array?.prototype, 'at', 'value');
+export const push = n(globalThis?.Array?.prototype, 'push', 'value');
 export const get = n(globalThis?.WeakMap?.prototype, 'get', 'value');
 export const set = n(globalThis?.WeakMap?.prototype, 'set', 'value');
 export const toFixed = n(globalThis?.Number?.prototype, 'toFixed', 'value');

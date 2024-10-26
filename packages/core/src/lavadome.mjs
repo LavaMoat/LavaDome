@@ -2,7 +2,7 @@
 
 import {OPTIONS, options} from './options.mjs';
 import {
-    Error, map, at,
+    Error, map, at, push,
     defineProperties,
     from, stringify,
     createElement,
@@ -10,12 +10,14 @@ import {
     replaceChildren,
     textContentSet,
     ownerDocument,
-    navigation,
+    navigation, Array,
     url, destination, includes,
     preventDefault, stopPropagation,
 } from './native.mjs';
 import {distraction, loadable, hardened} from './element.mjs';
 import {getShadow} from './shadow.mjs';
+
+const teardowns = Array();
 
 // text-fragments links can be abused to leak shadow internals - block in-app redirection to them
 navigation.addEventListener('navigate', event => {
@@ -26,6 +28,7 @@ navigation.addEventListener('navigate', event => {
         throw new Error(
             `LavaDomeCore: in-app redirection to text-fragments links is blocked to ensure security`);
     }
+    map(teardowns, teardown => teardown());
 });
 
 export function LavaDome(host, opts) {
@@ -38,11 +41,14 @@ export function LavaDome(host, opts) {
     const shadow = getShadow(host, opts);
     replaceChildren(shadow);
 
+    const teardown = () => replaceChildren(shadow);
+    push(teardowns, teardown);
+
     // fire every time instance is reloaded and abort loading for non-top documents
     const attach = loadable(element => {
         const ownerDoc = ownerDocument(element);
         if (ownerDoc !== document) {
-            replaceChildren(shadow);
+            teardown();
             throw new Error(`LavaDomeCore: ` +
                 `The document to which LavaDome was originally introduced ` +
                 `must be the same as the one this instance is inserted to`);
