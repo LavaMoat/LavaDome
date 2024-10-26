@@ -41,8 +41,8 @@ export function LavaDome(host, opts) {
     const shadow = getShadow(host, opts);
     replaceChildren(shadow);
 
+    // LavaDome teardown invoker
     const teardown = () => replaceChildren(shadow);
-    push(teardowns, teardown);
 
     // fire every time instance is reloaded and abort loading for non-top documents
     const attach = loadable(element => {
@@ -74,6 +74,9 @@ export function LavaDome(host, opts) {
 
         // attach loadable only once per instance to avoid excessive load firing
         attach(shadow);
+
+        // add to list of future teardowns
+        push(teardowns, teardown);
 
         // place each char of the secret in its own LavaDome protection instance
         map(from(text), char => {
