@@ -1,6 +1,7 @@
 'use strict';
 
 import {
+    appendChild,
     Array,
     createElement,
     entries, from,
@@ -8,7 +9,9 @@ import {
     parseInt, random,
     setAttribute,
     textContentSet,
-    toFixed,
+    toFixed, define,
+    HTMLElement,
+    customElements,
 } from './native.mjs';
 import {chars} from './char.mjs';
 
@@ -55,6 +58,14 @@ export const distraction = invoker(creator({
     'font-size': '1px',
 }, () => 'span', all));
 
-export const loadable = invoker(creator({
-    'display': 'none',
-}, () => 'iframe'));
+//
+export const loadable = function(cb) {
+    class Loadable extends HTMLElement {
+        constructor() { super() }
+        connectedCallback() { cb(element) }
+    }
+    const tag = rand(10) + '-' + rand(10);
+    define(customElements, tag, Loadable);
+    const element = createElement(document, tag);
+    return parent => appendChild(parent, element);
+}

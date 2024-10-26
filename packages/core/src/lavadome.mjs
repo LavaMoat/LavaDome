@@ -9,7 +9,6 @@ import {
     appendChild,
     replaceChildren,
     textContentSet,
-    addEventListener,
     ownerDocument,
     navigation,
     url, destination, includes,
@@ -40,9 +39,8 @@ export function LavaDome(host, opts) {
     replaceChildren(shadow);
 
     // fire every time instance is reloaded and abort loading for non-top documents
-    const iframe = loadable();
-    addEventListener(iframe, 'load', () => {
-        const ownerDoc = ownerDocument(iframe);
+    const attach = loadable(element => {
+        const ownerDoc = ownerDocument(element);
         if (ownerDoc !== document) {
             replaceChildren(shadow);
             throw new Error(`LavaDomeCore: ` +
@@ -69,7 +67,7 @@ export function LavaDome(host, opts) {
         }
 
         // attach loadable only once per instance to avoid excessive load firing
-        appendChild(shadow, iframe);
+        attach(shadow);
 
         // place each char of the secret in its own LavaDome protection instance
         map(from(text), char => {

@@ -6,6 +6,8 @@ const {
     parseInt, WeakMap,
     Error, JSON,
     navigation,
+    HTMLElement,
+    customElements,
 } = globalThis;
 const {
     defineProperties, assign,
@@ -21,7 +23,6 @@ const n = (obj, prop, accessor) =>
     obj && Function.prototype.call.bind(getOwnPropertyDescriptor(obj, prop)[accessor]);
 
 export const ownerDocument = n(globalThis?.Node?.prototype, 'ownerDocument', 'get');
-export const addEventListener = n(globalThis?.EventTarget?.prototype, 'addEventListener', 'value');
 export const replaceChildren = n(globalThis?.DocumentFragment?.prototype, 'replaceChildren', 'value');
 export const attachShadow = n(globalThis?.Element?.prototype, 'attachShadow', 'value');
 export const createElement = n(globalThis?.Document?.prototype, 'createElement', 'value');
@@ -41,6 +42,7 @@ export const destination = n(globalThis?.NavigateEvent?.prototype, 'destination'
 export const url = n(globalThis?.NavigationDestination?.prototype, 'url', 'get');
 export const preventDefault = n(globalThis?.Event?.prototype, 'preventDefault', 'value');
 export const stopPropagation = n(globalThis?.Event?.prototype, 'stopPropagation', 'value');
+export const define = n(globalThis?.CustomElementRegistry?.prototype, 'define', 'value');
 
 export {
     // window
@@ -49,6 +51,8 @@ export {
     parseInt, WeakMap,
     Error, JSON,
     navigation,
+    HTMLElement,
+    customElements,
     // Object
     defineProperties, assign,
     getOwnPropertyDescriptor,
