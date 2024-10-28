@@ -18,6 +18,7 @@ import {distraction, loadable, hardened} from './element.mjs';
 import {getShadow} from './shadow.mjs';
 
 const teardowns = Array();
+const teardownAll = () => map(teardowns, t => t());
 
 // text-fragments links can be abused to leak shadow internals - block in-app redirection to them
 navigation?.addEventListener('navigate', event => {
@@ -28,8 +29,10 @@ navigation?.addEventListener('navigate', event => {
         throw new Error(
             `LavaDomeCore: in-app redirection to text-fragments links is blocked to ensure security`);
     }
-    map(teardowns, teardown => teardown());
+    teardownAll();
 });
+
+addEventListener('pagehide', teardownAll);
 
 export function LavaDome(host, opts) {
     opts = options(opts);
