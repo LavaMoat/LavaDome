@@ -2,21 +2,23 @@
 
 import {OPTIONS, options} from './options.mjs';
 import {
-    Error, map, at,
+    Error, map, at, push,
     defineProperties,
     from, stringify,
     createElement,
     appendChild,
     replaceChildren,
     textContentSet,
-    addEventListener,
     ownerDocument,
-    navigation,
+    navigation, Array,
     url, destination, includes,
     preventDefault, stopPropagation,
 } from './native.mjs';
 import {distraction, loadable, hardened} from './element.mjs';
 import {getShadow} from './shadow.mjs';
+
+const teardowns = Array();
+const teardownAll = () => map(teardowns, t => t());
 
 // text-fragments links can be abused to leak shadow internals - block in-app redirection to them
 navigation?.addEventListener('navigate', event => {
@@ -27,7 +29,10 @@ navigation?.addEventListener('navigate', event => {
         throw new Error(
             `LavaDomeCore: in-app redirection to text-fragments links is blocked to ensure security`);
     }
+    teardownAll();
 });
+
+addEventListener('pagehide', teardownAll);
 
 export function LavaDome(host, opts) {
     opts = options(opts);
@@ -39,12 +44,14 @@ export function LavaDome(host, opts) {
     const shadow = getShadow(host, opts);
     replaceChildren(shadow);
 
+    // LavaDome teardown invoker
+    const teardown = () => replaceChildren(shadow);
+
     // fire every time instance is reloaded and abort loading for non-top documents
-    const iframe = loadable();
-    addEventListener(iframe, 'load', () => {
-        const ownerDoc = ownerDocument(iframe);
+    const attach = loadable(element => {
+        const ownerDoc = ownerDocument(element);
         if (ownerDoc !== document) {
-            replaceChildren(shadow);
+            teardown();
             throw new Error(`LavaDomeCore: ` +
                 `The document to which LavaDome was originally introduced ` +
                 `must be the same as the one this instance is inserted to`);
@@ -69,7 +76,10 @@ export function LavaDome(host, opts) {
         }
 
         // attach loadable only once per instance to avoid excessive load firing
-        appendChild(shadow, iframe);
+        attach(shadow);
+
+        // add to list of future teardowns
+        push(teardowns, teardown);
 
         // place each char of the secret in its own LavaDome protection instance
         map(from(text), char => {
