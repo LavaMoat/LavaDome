@@ -2,13 +2,15 @@
 
 import {OPTIONS, options} from './options.mjs';
 import {
-    Error, map, at,
+    Error, map, at, TypeError,
     defineProperties,
-    from, stringify,
+    from,
     createElement,
     appendChild,
     replaceChildren,
     textContentSet,
+    Blob, ClipboardItem,
+    write, clipboard,
     addEventListener,
     ownerDocument,
     navigation,
@@ -33,7 +35,10 @@ export function LavaDome(host, opts) {
     opts = options(opts);
     
     // make exported API tamper-proof
-    defineProperties(this, {text: {value: text}});
+    defineProperties(this, {
+        text: {value: text},
+        copy: {value: copy},
+    });
 
     // get/create shadow for host (empty shadow content if there's any already)
     const shadow = getShadow(host, opts);
@@ -55,24 +60,29 @@ export function LavaDome(host, opts) {
     const child = hardened();
     appendChild(shadow, child);
 
-    function text(text) {
-        if (typeof text !== 'string') {
-            throw new Error(
-                `LavaDomeCore: first argument must be a string, instead got ${stringify(text)}`);
+    let secret = '';
+
+    function text(input) {
+        const type = typeof input;
+        if (type !== 'string') {
+            throw new TypeError(
+                `LavaDomeCore: first argument must be a string, instead got ${type}`);
         }
 
         // check if text is a single char and if so, either is part of a longer secret
         // which is protected by the parent LavaDome, or simply a single char provided by
         // consumer either way - not worth attempting to secure
-        if (at(from(text), 1) === undefined) {
-            return textContentSet(child, text);
+        if (at(from(input), 1) === undefined) {
+            return textContentSet(child, input);
         }
+
+        secret = input;
 
         // attach loadable only once per instance to avoid excessive load firing
         appendChild(shadow, iframe);
 
         // place each char of the secret in its own LavaDome protection instance
-        map(from(text), char => {
+        map(from(input), char => {
             const span = createElement(document, 'span');
             // mark as internal LavaDome instance
             opts[OPTIONS.isInnerInstance] = true;
@@ -82,5 +92,12 @@ export function LavaDome(host, opts) {
 
         // add a distraction against side channel leaks attack attempts
         appendChild(child, distraction());
+    }
+
+    async function copy() {
+        const type = 'text/plain';
+        const blob = new Blob([secret], {type});
+        const data = [new ClipboardItem({[type]: blob})];
+        await write(clipboard, data);
     }
 }

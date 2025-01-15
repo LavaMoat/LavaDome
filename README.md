@@ -49,6 +49,7 @@ import { LavaDome as LavaDomeJavaScript } from '@lavamoat/lavadome-javascript';
 const root = document.getElementById('root');
 const lavadome = new LavaDomeJavaScript(root);
 lavadome.text(secret);
+lavadome.copy(); // copy to clipboard
 ```
 
 ### [React](./packages/react)
@@ -57,7 +58,11 @@ lavadome.text(secret);
 import { LavaDome as LavaDomeReact, toLavaDomeToken } from '@lavamoat/lavadome-react';
 
 function Secret({ text }) {
-    return <LavaDomeReact text={toLavaDomeToken(text)} />
+    const {token, copy} = toLavaDomeCapabilities(text);
+    return <>
+        <a onClick={copy}> copy to clipboard </a>
+        <LavaDomeReact token={token} />
+    </>;
 }
 ```
 
@@ -74,8 +79,9 @@ new LavaDomeJavaScript(root, {
 
 // react
 function Secret({ text }) {
+    const {token} = toLavaDomeCapabilities(text);
     return <LavaDomeReact
-        text={toLavaDomeToken(text)}
+        token={token}
         // boolean
         unsafeOpenModeShadow={false}
     />
