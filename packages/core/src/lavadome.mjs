@@ -46,9 +46,9 @@ export function LavaDome(host, opts) {
 
     // fire every time instance is reloaded and abort loading for non-top documents
     const iframe = loadable();
+    const ownerDoc = ownerDocument(iframe);
     addEventListener(iframe, 'load', () => {
-        const ownerDoc = ownerDocument(iframe);
-        if (ownerDoc !== document) {
+        if (ownerDoc !== ownerDocument(iframe)) {
             replaceChildren(shadow);
             throw new Error(`LavaDomeCore: ` +
                 `The document to which LavaDome was originally introduced ` +
